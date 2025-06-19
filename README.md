@@ -1,4 +1,4 @@
-# HmEditor 模板制作工具前端（hm_editor.admin.web）
+# 惠每电子病历编辑器模板制作工具-前端
 
 本项目是 HmEditor 自带的模板制作与数据元管理工具的前端部分，对应后台服务为 "hm_editor.admin.service"。
 
