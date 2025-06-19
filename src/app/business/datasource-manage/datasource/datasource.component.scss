@@ -1,0 +1,39 @@
+.box{
+    flex-direction: column;
+}
+
+.box{
+
+    .row{
+        input{
+            width: 160px;
+        }
+    }
+    .center{
+        text-align: center;
+        display: block !important;
+    }
+    .ops{
+        text-align: right;
+        display: inline-block;
+    }
+    .right{
+        >div{
+            margin-bottom: 10px;
+        }
+    }
+}
+
+
+
+:host /deep/ .top .ui-datatable-scrollable-body{
+    max-height: calc(60vh - 200px);
+}
+:host /deep/ .bottom .ui-datatable-scrollable-body{
+    max-height: calc(40vh - 110px);
+}
+
+/* 确保所有表格内的字体大小一致 */
+:host /deep/ .ui-datatable {
+  font-size: 14px;
+}

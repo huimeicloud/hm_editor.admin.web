@@ -1,0 +1,201 @@
+<div class="ui-g-12 box clearfix">
+  <div class="search-box">
+  <div class="clearfix">
+    <form (ngSubmit)="searchParams.page.currentPage=1;getEmrDataSourceList()">
+      <span class="ui-inputgroup-addon" style="width: 150px;">模板名称：</span>
+        <input type="text" pInputText [style]="{'width':'200px'}" [(ngModel)]="searchParams.templateTrueName"
+                [ngModelOptions]="{standalone: true}">
+        <span class="ui-inputgroup-addon" style="width: 150px;">数据元名称：</span>
+        <input type="text" pInputText [style]="{'width':'200px'}" [(ngModel)]="searchParams.key"
+                [ngModelOptions]="{standalone: true}">
+        <button pButton type="submit" icon="fa-search" class="ui-button-success ml-10" style="min-width: 64px;"
+                label="查询"></button>
+    </form>
+  </div>
+  <div class="button-box">
+      <div class="note">
+        <span>仅支持xlsx格式文件导入，模板下载：</span>
+        <a class="template-edit-a" href="assets/data-source-template.xlsx" download="data-source-template" >data-source-template.xlsx</a>
+      </div>
+      <p-fileUpload #fubauto mode="basic" name="uploadfile" url="/emr-server/admin-service/dataElement/upload"
+                    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                    style="float: left;margin-left: 10px;"
+                    (onError)="onUploadError($event)"
+                    (onUpload)="onUploadComplete($event)" auto="true" chooseLabel="导入数据元"></p-fileUpload>
+      <button type="button" pButton icon="fa-plus" class="ui-button-warning ml-10" (click)="showDialogToCreateEmrDataSource()" label="添加数据元"></button>
+  </div>
+</div>
+  <div class="ui-g-12 content-box" style="height:calc(100vh - 152px)">
+    <p-dataTable [value]="emrDataSourceList" dataKey="_id" sortMode="none" [style]="{'max-height': 'calc(100vh - 197px)','text-align':'center'}" fixedPaginator="true" scrollable="true" scrollHeight="calc(100vh - 238px)">
+      <p-column [style]="{'text-align':'center'}" header="序号"><ng-template let-col let-patient="rowData" let-index="rowIndex" pTemplate="body">
+        <span>{{index + 1}}</span>
+      </ng-template></p-column>
+      <p-column field="templateName" header="模板名称"></p-column>
+      <p-column field="dataSourceName" header="数据元名称"></p-column>
+      <p-column field="description" header="数据元定义"></p-column>
+      <p-column field="typeName" header="类型"></p-column>
+      <p-column field="typeItems" header="值域"></p-column>
+      <p-column field="placeholder" header="占位文本"></p-column>
+      <p-column field="searchOption" header="搜索类型"></p-column>
+      <p-column field="searchPair" header="搜索编码"></p-column>
+      <p-column field="createDate" header="创建时间"></p-column>
+      <p-column [style]="{'width':'15%'}">
+        <ng-template pTemplate="header">操作</ng-template>
+        <ng-template let-col let-template="rowData" pTemplate="body">
+
+          <button pButton type="button" (click)="showDialogToEditEmrDataSource(template)" label="编辑"></button>
+          <button pButton type="button" (click)="removeEmrDataSource(template)" label="删除"></button>
+        </ng-template>
+    </p-column>
+
+      <ng-template pTemplate="emptymessage">
+        <tr style="line-height: 45px;text-align: center;">
+          <td [attr.colspan]="10">
+            未查询到数据元信息！
+          </td>
+        </tr>
+      </ng-template>
+
+    </p-dataTable>
+    <p-paginator [rows]="searchPage['pageSize']"
+    [totalRecords]="searchPage['totalRecords']" pageLinkSize="3"
+     (onPageChange)="paginate($event)"></p-paginator>
+  </div>
+</div>
+<p-dialog header="数据元信息" [(visible)]="displayEmrDataSourceDialog" [contentStyle]="{'overflow':'visible'}"
+          [responsive]="true" showEffect="fade" [modal]="true" [width]="600" >
+  <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="emrDataSource">
+    <form [formGroup]="emrDataSourceForm">
+      <div class="ui-g-12 pd4px">
+        <div class="ui-g-4">
+          <label for="templateName">模板名称*：</label>
+        </div>
+        <div class="ui-g-8">
+          <!-- <input pInputText id="templateName" formControlName="templateName" style="width: 100%"
+                 [(ngModel)]="emrDataSource.templateName"/> -->
+                 <p-dropdown id="templateName" formControlName="templateName" [options]="templateNameList"
+                      [style]="{'width':'100%'}"
+                      [(ngModel)]="emrDataSource.templateName"
+                       appendTo="body" filter="true"></p-dropdown>
+        </div>
+      </div>
+      <div class="ui-g-12 pd4px">
+        <div class="ui-g-4">
+          <label for="dataSourceName">数据元名称*：</label>
+        </div>
+        <div class="ui-g-8">
+          <input pInputText id="dataSourceName" formControlName="dataSourceName" style="width: 100%"
+                 [(ngModel)]="emrDataSource.dataSourceName"/>
+        </div>
+      </div>
+      <div class="ui-g-12 pd4px">
+          <div class="ui-g-4">
+            <label for="dataSourceName">数据元定义*：</label>
+          </div>
+          <div class="ui-g-8">
+            <input pInputText id="description" formControlName="description" style="width: 100%"
+                   [(ngModel)]="emrDataSource.description"/>
+          </div>
+        </div>
+      <div class="ui-g-12 pd4px">
+        <div class="ui-g-4">
+          <label for="dataSourceType">类型*：</label>
+        </div>
+        <div class="ui-g-8">
+          <p-dropdown id="dataSourceType" formControlName="dataSourceType" [options]="dataSourceTypeList"
+                      [style]="{'width':'100%'}"
+                      [(ngModel)]="emrDataSource.dataSourceType" dataKey="code"
+                      optionLabel="name" (onChange)="changeDataSourceTypeEvt(emrDataSource)" appendTo="body"></p-dropdown>
+        </div>
+      </div>
+      <div class="ui-g-12 pd4px" [hidden]="!emrDataSource.dataSourceType?.hasItems">
+        <div class="ui-g-4">
+          <label for="typeItems">值域：</label>
+        </div>
+        <div class="ui-g-8">
+          <input pInputText id="typeItems" formControlName="typeItems"
+                 style="width: 100%"
+                 placeholder="{{emrDataSource.dataSourceType?.placeHolder}}"
+                 [(ngModel)]="emrDataSource.typeItems"/>
+        </div>
+      </div>
+
+      <div class="ui-g-12 pd4px" [hidden]="emrDataSource.dataSourceType?.code!=='textbox'&&emrDataSource.dataSourceType?.code!=='newtextbox'">
+        <div class="ui-g-4">
+          <label for="placeholder">占位文本：</label>
+        </div>
+        <div class="ui-g-8">
+          <input pInputText id="placeholder" formControlName="placeholder" style="width: 100%"
+                 [(ngModel)]="emrDataSource.placeholder"/>
+        </div>
+      </div>
+
+      <div class="ui-g-12 pd4px" [hidden]="emrDataSource.dataSourceType?.code!=='searchbox'">
+        <div class="ui-g-4">
+          <label for="searchOption">搜索类型：</label>
+        </div>
+        <div class="ui-g-8">
+          <p-dropdown id="searchOption" formControlName="searchOption" [options]="searchOptionList"
+                      [style]="{'width':'100%'}"
+                      [(ngModel)]="emrDataSource.searchOptionObj" dataKey="code"
+                      optionLabel="name"></p-dropdown>
+        </div>
+      </div>
+      <div class="ui-g-12 pd4px" [hidden]="emrDataSource.dataSourceType?.code!=='searchbox'">
+        <div class="ui-g-4">
+          <label for="searchPair">搜索编码：</label>
+        </div>
+        <div class="ui-g-8">
+          <input pInputText id="searchPair" formControlName="searchPair" style="width: 100%"
+                 [(ngModel)]="emrDataSource.searchPair" placeholder="对应编码/编码名称"/>
+        </div>
+      </div>
+      <div class="ui-g-12 pd4px">
+        <div style="height: 0;border: 1px dashed #eeeeee;margin: 4px 0;"></div>
+      </div>
+
+      <div class="ui-g-12 pd4px" *ngIf="emrDataSource.dataSourceType.code == 'searchbox'">
+        <div class="ui-g-4">
+          <label for="printColor">回车自动增加控件：</label>
+        </div>
+        <div class="ui-g-8">
+          <p-dropdown id="enterAutoGrow" formControlName="enterAutoGrow" [options]="enterAutoGrowList"
+                      [style]="{'width':'100%'}"
+                      [(ngModel)]="emrDataSource.enterAutoGrowObj" dataKey="code"
+                      optionLabel="name"></p-dropdown>
+        </div>
+      </div>
+      <div class="ui-g-12 pd4px" *ngIf="timeBoxList.indexOf(emrDataSource.dataSourceType.code) > -1">
+        <div class="ui-g-4">
+          <label for="autoshowcurtime">是否默认显示当前时间：</label>
+        </div>
+        <div class="ui-g-8">
+          <p-dropdown id="autoshowcurtime" formControlName="autoshowcurtime" [options]="autoshowcurtimeList"
+                      [style]="{'width':'100%'}"
+                      [(ngModel)]="emrDataSource.autoshowcurtimeObj" dataKey="code"
+                      optionLabel="name"></p-dropdown>
+        </div>
+      </div>
+      <div class="ui-g-12 pd4px" *ngIf="emrDataSource.dataSourceType.code != 'textbox' && emrDataSource.dataSourceType.code != 'button'">
+        <div class="ui-g-4">
+          <label for="isdisabled">设置为不可编辑状态：</label>
+        </div>
+        <div class="ui-g-8">
+          <p-dropdown id="isdisabled" formControlName="isdisabled" [options]="isdisabledList"
+                      [style]="{'width':'100%'}"
+                      [(ngModel)]="emrDataSource.isdisabledObj" dataKey="code"
+                      optionLabel="name"></p-dropdown>
+        </div>
+      </div>
+    </form>
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton icon="fa-close" (click)="displayEmrDataSourceDialog=false" label="取消"></button>
+      <button type="button" pButton icon="fa-check"
+              [disabled]="!emrDataSourceForm.valid"
+              (click)="saveEmrDataSource()"
+              label="确定"></button>
+    </div>
+  </p-footer>
+</p-dialog>

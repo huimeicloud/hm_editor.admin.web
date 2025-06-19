@@ -1,0 +1,235 @@
+$space:5px;
+#folder{
+    display: flex;
+    height: 100%;
+    padding: 0 10px;
+    & > div{
+        height: 100%;
+        overflow: hidden;
+        background: #fff;
+        // box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        p{
+            padding: $space;
+            margin-bottom: $space;
+            border-bottom: 1px solid #eee;
+            font-weight: bold;
+            font-size: 1.2em;
+            background: #f9f9f9;
+        }
+    }
+    .left-area{
+        width: 240px;
+        border-right: 1px solid #eee;
+        margin-right: 10px;
+        p{
+            margin: 0;
+        }
+    }
+    .right-area{
+        flex: 1;
+        background: unset;
+        padding: $space;
+        & > p{
+            margin-left: -5px;
+            background: #fff;
+            margin-top: -5px;
+        }
+        &>button{
+            margin-bottom: $space;
+        }
+        &>input.inp {
+            height: 30px;
+            border-radius: 3px;
+            margin-right: 10px;
+            width: 200px;
+            border: 1px solid #ccc;
+            padding: 0 10px;
+        }
+    }
+    dl{
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 10px;
+        height: calc(100% - 40px);
+        overflow-y: auto;
+        margin-top: 0;
+        dd{
+            margin: 0;
+            padding: 0;
+            border-bottom: 1px dotted #eee;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            &:hover {
+                background-color: #f5f5f5;
+            }
+
+            span{
+                padding: 5px;
+                display: block;
+            }
+        }
+        .sel{
+            span{
+                color: #1b82d7;
+                background: #f0f7ff;
+                border-left: 3px solid #1b82d7;
+                font-weight: 500;
+            }
+        }
+        div{
+            float:right;
+            display: inline-block;
+            height: 1.5em;
+            margin-right: 10px;
+        }
+    }
+}
+
+.scroll-cell {
+    max-width: none;
+    padding: 5px;
+    width: 100%;
+}
+
+.scroll-inner {
+    max-height: 200px;
+    overflow-y: auto;
+    word-break: break-all;
+}
+
+.design-template-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+
+    .header-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: #f0f7ff;
+        border-bottom: 1px solid #e0e0e0;
+        height: 50px;
+
+        span {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+
+            .btn {
+                padding: 5px 15px;
+                background: #1b82d7;
+                color: white;
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+                transition: background 0.3s;
+
+                &:hover {
+                    background: #0e6bba;
+                }
+
+                &:last-child {
+                    background: #f44336;
+
+                    &:hover {
+                        background: #d32f2f;
+                    }
+                }
+            }
+        }
+    }
+
+    .wrapper {
+        flex: 1;
+        overflow: hidden;
+        background: #ffffff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* 优化表格外观 */
+:host ::ng-deep {
+    p-dataTable .ui-datatable {
+        border: none;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    p-dataTable .ui-datatable .ui-datatable-thead > tr > th {
+        background-color: #f9f9f9;
+        border-color: #e0e0e0;
+        font-weight: 600;
+        color: #333;
+        padding: 10px 8px;
+    }
+
+    p-dataTable .ui-datatable .ui-datatable-tbody > tr {
+        border-color: #e0e0e0;
+
+        &:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        &:hover {
+            background-color: #f0f7ff;
+        }
+    }
+
+    button.ui-button-icon-only {
+        width: 2em;
+        height: 2em;
+    }
+
+    .ui-paginator {
+        background-color: #f9f9f9;
+        border-color: #e0e0e0;
+    }
+
+    .ui-paginator .ui-paginator-page.ui-state-active {
+        background-color: #1b82d7;
+    }
+
+    /* 调整列宽 */
+    p-dataTable p-column[header="序号"] {
+        width: 60px !important;
+    }
+
+    p-dataTable p-column[header="模板名称"] {
+        width: 180px !important;
+    }
+
+    p-dataTable p-column[header="模板类别"] {
+        width: 80px !important;
+    }
+
+    p-dataTable p-column[header="是否禁止多份"] {
+        width: 100px !important;
+    }
+
+    p-dataTable p-column[header="数据集"] {
+        flex: 1 !important;
+        min-width: 250px !important;
+    }
+
+    p-dataTable p-column[header="操作"] {
+        width: 180px !important;
+    }
+    .ui-button-text-only .ui-button-text {
+        padding: 0 !important;
+    }
+    .ui-widget-content .ui-dialog-footer{
+        justify-content:center !important;
+    }
+}

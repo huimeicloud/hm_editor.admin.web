@@ -1,0 +1,8 @@
+<div id="layout-topbar">
+    <div id="sysLogo" [class.hide]="!navDisplay">
+      <img id="logo" alt="惠每EMR编辑器-后台管理" src="assets/img/emr-logo.png">
+      <div id="logoContent" [class.hide]="!navDisplay">惠每EMR编辑器-后台管理</div>
+    </div>
+  <i [class]="'iconfont ' + (navDisplay ? 'icon-menu-unfold' : 'icon-menu-pack-up')" (click)="toggleNavOnclick()"></i>
+  <!-- <div id="rightValue">{{hospitalName}}</div> -->
+</div>

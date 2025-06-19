@@ -1,0 +1,162 @@
+<div id="folder" *ngIf="!editorDisplay">
+  <div class="left-area">
+    <p>目录</p>
+    <!-- <p-tree [value]="treeNodes" selectionMode="single" [(selection)]="curFolder" [loading]="treeLoading" (onNodeSelect)="nodeSelect($event)"
+             styleClass="hm-tree" >
+            <ng-template let-node let-i pTemplate="patient">
+                <div><span>{{node.name}}</span>
+                  <i>
+                    123
+                     <button *ngIf="node.value.order > 1" type="button" pButton icon="iconfont fa-arrow-circle-up"
+                      (click)="move(node, -1)" class="tree-emrRecord-btn" pTooltip="上移"></button>
+                      <button *ngIf="node.value.order &lt; treeNodes.length" type="button" pButton icon="iconfont fa-arrow-circle-down" (click)="move(node,1)"
+                      class="tree-emrRecord-btn" pTooltip="下移"></button>
+                      </i>
+                </div>
+
+            </ng-template>
+        </p-tree> -->
+
+
+        <dl class="tree">
+          <dd *ngFor="let node of treeNodes index as i" [class]="curFolder == node?'sel':''">
+            <span (click)="nodeSelect(node)">{{node.name}}</span>
+            <!-- <div *ngIf="curFolder == node" style="display: inline-block;">
+            <button *ngIf="i > 0" type="button" pButton icon="fa-arrow-circle-up"
+              (click)="mup( i)" class="tree-emrRecord-btn" pTooltip="上移"></button>
+              <button *ngIf="i &lt; treeNodes.length - 1" type="button" pButton icon="fa-arrow-circle-down" (click)="mdown(i)"
+              class="tree-emrRecord-btn" pTooltip="下移"></button>
+            </div> -->
+          </dd>
+        </dl>
+  </div>
+  <div class="right-area">
+    <p>病历名称</p>
+    <input type="text" pInputText style="vertical-align: middle;" class="inp" [(ngModel)]="templateSearchName" placeholder="请输入模板名称"
+           [ngModelOptions]="{standalone: true}">
+    <button pButton type="button"  icon="iconfont icon-sousuo" label="查询" (click)="searchName()"></button>
+    <button type="button" pButton icon="fa-plus" class="hm-button-lg"
+            (click)="showDialogToCreateEmrBaseTemplate()"  label="新增">
+    </button>
+    <p-dataTable [style]="{'width': '100%', 'max-height': 'calc(100% - 90px)','overflow':'auto','text-align':'center'}"
+    [value]="emrBaseTemplateList" dataKey="_id"
+    [lazy]="true" (onLazyLoad)="loadCarsLazy($event)" [paginator]="true" [rows]="searchParams.page.pageSize"
+    [first]="first" [totalRecords]="searchParams.page.totalRecords" [pageLinks]="5" emptyMessage="暂无数据">
+    <p-column header="序号" [style]="{'width':'6%'}">
+      <ng-template let-rowIndex="rowIndex" pTemplate="body">
+        <span>{{rowIndex+1}}</span>
+      </ng-template>
+    </p-column>
+    <p-column field="templateName" header="模板名称" [style]="{'width':'20%'}"></p-column>
+    <p-column field="type" header="模板类别" [style]="{'width':'10%'}"></p-column>
+    <p-column header="是否禁止多份" [style]="{'width':'10%'}">
+      <ng-template let-baseTemplate="rowData" pTemplate="body">
+        <span>{{baseTemplate.isForbidMultiple == '0'?'否':'是'}}</span>
+      </ng-template>
+    </p-column>
+    <p-column header="数据集" [style]="{'width':'25%'}">
+      <ng-template let-baseTemplate="rowData" pTemplate="body">
+        <div class="scroll-cell">
+          <div class="scroll-inner">{{formatDSet(baseTemplate.dsSet)}}</div>
+        </div>
+      </ng-template>
+    </p-column>
+    <p-column header="操作" [style]="{'width':'240px'}">
+      <ng-template let-baseTemplate="rowData" pTemplate="body">
+        <button pButton type="button" (click)="showDialogToEditEmrBaseTemplate(baseTemplate)" label="编辑"></button>
+        <button pButton type="button" (click)="removeEmrBaseTemplate(baseTemplate)" label="删除"></button>
+        <button pButton type="button" (click)="makeTemplate(baseTemplate)" label="制作模板"></button>
+      </ng-template>
+    </p-column>
+    <p-column *ngIf="emrBaseTemplateList.length == 0">
+      <ng-template pTemplate="emptymessage">
+        <div>未检索到模板分类信息！</div>
+      </ng-template>
+    </p-column>
+  </p-dataTable>
+  </div>
+</div>
+<!-- 编辑器窗口 -->
+<div class="design-template-wrapper" *ngIf="editorDisplay" >
+  <div class="header-group">
+    <span style="color: #1b82d7;">{{editorTemplateName}}</span>
+    <div class="btn-group">
+        <button type="button" class="btn" (click)="importTemplate()">导入模板</button>
+        <button type="button" class="btn" (click)="exportTemplate()">导出模板</button>
+        <button type="button" class="btn" (click)="backToList()">返回列表</button>
+    </div>
+    <input type="file" id="fileImport" style="display: none;" (change)="handleFileImport($event)">
+  </div>
+  <div class="wrapper" id="editorContainer">
+
+  </div>
+
+</div>
+<p-dialog header="模板信息" [(visible)]="displayEmrBaseTemplateDialog" [contentStyle]="{'overflow':'visible'}"
+          [responsive]="true" showEffect="fade" [modal]="true" [width]="600" appendTo="body">
+  <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="emrBaseTemplate">
+
+      <div class="clearfix">
+        <div class="ui-g-3">
+          <label for="folder">目录*：</label>
+        </div>
+        <div class="ui-g-9">
+          <p-dropdown id="folder"  [options]="folderList" [style]="{'width':'100%'}"
+                      [(ngModel)]="emrBaseTemplate.folder" dataKey="idStr"
+                      optionLabel="folder"></p-dropdown>
+        </div>
+      </div>
+      <div class="clearfix">
+        <div class="ui-g-3">
+          <label for="templateName">模板名称*：</label>
+        </div>
+        <div class="ui-g-9">
+          <input pInputText id="templateName"  style="width: 100%"
+                 [(ngModel)]="emrBaseTemplate.templateName" [disabled]="editorNameFlag"/>
+        </div>
+      </div>
+      <div class="clearfix">
+        <div class="ui-g-3">
+          <label>是否禁止多份*：</label>
+        </div>
+        <div class="ui-g-9">
+          <p-radioButton name="isForbidMultiple" value="1" label="是"
+                         [(ngModel)]="emrBaseTemplate.isForbidMultiple"></p-radioButton>
+          <p-radioButton name="isForbidMultiple" value="0" label="否"
+                         [(ngModel)]="emrBaseTemplate.isForbidMultiple"></p-radioButton>
+        </div>
+      </div>
+      <div class="clearfix">
+        <div class="ui-g-3">
+          <label for="type">类别*：</label>
+        </div>
+        <div class="ui-g-9">
+          <p-dropdown id="type"  [options]="templateTypeList" [style]="{'width':'100%'}"
+                      [(ngModel)]="emrBaseTemplate.typeObject" dataKey="code"
+                      optionLabel="name"></p-dropdown>
+        </div>
+      </div>
+      <div class="clearfix">
+        <div class="ui-g-3">
+          <label for="type">数据集*：</label>
+        </div>
+        <div class="ui-g-9">
+          <p-multiSelect
+            [options]="dsSet"
+            [(ngModel)]="emrBaseTemplate.dsSet"
+            [maxSelectedLabels]="10"
+            selectedItemsLabel="已选择 {0} 项"
+            defaultLabel="请选择"
+            appendTo="body"
+          ></p-multiSelect>
+        </div>
+      </div>
+  </div>
+  <p-footer>
+    <div>
+      <button type="button" pButton icon="fa-check" (click)="saveEmrBaseTemplate()"label="确定"></button>
+      <button type="button" pButton icon="fa-close" (click)="displayEmrBaseTemplateDialog=false" label="取消"></button>
+    </div>
+  </p-footer>
+</p-dialog>
+<p-confirmDialog acceptLabel="确认" rejectLabel="取消"></p-confirmDialog>

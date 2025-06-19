@@ -1,0 +1,27 @@
+.box{
+    .row{
+        width:300px;
+        input{
+            width: 240px;
+        }
+    }
+    .center{
+        text-align: center;
+    }
+    .ops{
+        text-align: right;
+        display: none;
+    }
+    .right{
+        >div{
+            margin-bottom: 10px;
+            background-color: #fff;
+        }
+    }   
+}
+:host /deep/ .left .ui-datatable-scrollable-body{
+    max-height: calc(100vh - 225px);
+}
+:host /deep/ .right .ui-datatable-scrollable-body{
+    max-height: calc(50vh - 140px);
+}

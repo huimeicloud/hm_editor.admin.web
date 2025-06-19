@@ -1,0 +1,45 @@
+.note{
+    height: 2em;
+    line-height: 2em;
+}
+.search-box{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    >*{
+    padding:0.5em;
+    }
+}
+.button-box{
+    display: flex;
+    flex-grow: 1;
+    justify-content: end;
+    align-items: center;
+    >*{
+        height:28px;
+    }
+}
+
+
+@media screen and (max-width:1435px){
+    .content-box{
+        height:calc(100vh - 195px) !important;
+    }
+    :host ::ng-deep .ui-datatable-scrollable{
+        max-height:calc(100vh - 240px) !important;
+    }
+    :host ::ng-deep .ui-datatable-scrollable-body{
+        max-height:calc(100vh - 280px) !important;
+    }
+}
+@media screen and (min-width:1435px){
+    .content-box{
+        height:calc(100vh - 195px) !important;
+    }
+    :host ::ng-deep .ui-datatable-scrollable{
+        max-height:calc(100vh - 240px) !important;
+    }
+    :host ::ng-deep .ui-datatable-scrollable-body{
+        max-height:calc(100vh - 280px) !important;
+    }
+}

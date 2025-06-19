@@ -1,0 +1,140 @@
+.main-box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-top: 56px;
+    overflow: auto;
+    box-sizing: border-box;
+    margin-left: 0;
+}
+
+p-dialog {
+  .ui-widget.ui-dialog {
+      background: #fff;
+      box-shadow: 0px 2px 4px 0px rgba(29,77,123,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+
+      .ui-dialog-titlebar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 20px;
+          background: #fff;
+
+          &::before, &::after {
+              content: none;
+          }
+
+          .ui-dialog-titlebar-icon {
+              font-size: 20px;
+              color: #6B7179;
+
+              &:hover {
+                  border-color: transparent;
+                  background: transparent;
+                  color: #EB564A;
+              }
+
+              .fa.fa-close {
+                  font-family:"iconfont" !important;
+                  font-style:normal;
+                  -webkit-font-smoothing: antialiased;
+                  -moz-osx-font-smoothing: grayscale;
+
+                  &::before {
+                      content: "\e625";
+                  }
+              }
+          }
+      }
+
+      .ui-dialog-content {
+          padding: 0;
+          width: 100%;
+      }
+
+      &.editor-dlg {
+          width: calc(100% - 40px);
+          height: calc(100% - 40px);
+          border-radius:10px 10px 0px 0px;
+
+          .ui-dialog-titlebar {
+              height: 40px;
+              background: linear-gradient(180deg, #F9FAFD, #E3E4E7);
+
+              .ui-dialog-title {
+                  font-size: 14px;
+              }
+
+              .ui-dialog-titlebar-icon {
+                  font-size: 14px;
+                  &:hover {
+                      margin-right: -3px;
+                      border: 4px solid transparent;
+                      border-radius: 15px;
+                      background: rgba(235, 86, 74, 0.2);
+                      color: #EB564A;
+                  }
+              }
+          }
+
+          .ui-dialog-content {
+              height: inherit;
+              overflow: hidden;
+          }
+
+          .ui-dialog-footer {
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+              height:50px;
+              background: #F9F9FA;
+              box-shadow:0px -2px 4px 0px rgba(29, 77, 123, 0.1);
+          }
+
+      }
+
+      &.form-dlg {
+          border-radius: 0px 10px 10px 0px;
+          border-left: 8px solid #E8CB70;
+          .ui-dialog-titlebar {
+              height: 60px;
+
+              .ui-dialog-title {
+                  font-size: 18px;
+              }
+          }
+      }
+
+      &.confirm-dlg {
+          width:470px;
+          height:240px;
+
+          .ui-dialog-titlebar {
+              margin: 30px 10px 0;
+
+              .ui-dialog-title {
+                  font-size: 24px;
+              }
+          }
+
+          .ui-dialog-content {
+              height: calc(100% - 130px);
+              padding: 0 30px;
+          }
+
+          .ui-dialog-footer {
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+              height: 30px;
+              padding: 0 30px;
+              background: #fff;
+              box-shadow: none;
+              border: none;
+          }
+
+      }
+  }
+}

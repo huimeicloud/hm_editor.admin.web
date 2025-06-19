@@ -1,0 +1,137 @@
+.welcome-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  background-color: #f5f7fa;
+  padding: 40px;
+}
+
+.welcome-card {
+  max-width: 650px;
+  // margin: 60px auto;
+  padding: 30px 36px 40px 36px;
+  background: linear-gradient(135deg, #fafdff 0%, #eaf4ff 100%);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(64, 158, 255, 0.08), 0 1.5px 6px rgba(0,0,0,0.04);
+  text-align: center;
+  border: 1px solid #e3eaf1;
+  position: relative;
+}
+
+.welcome-card-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #409EFF;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+
+.welcome-card-desc {
+  background: #fafdff;
+  border-radius: 10px;
+  border-left: 5px solid #409EFF;
+  padding: 24px 28px 24px 32px;
+  margin-bottom: 32px;
+  box-shadow: 0 2px 8px rgba(64,158,255,0.06);
+  color: #444;
+  font-size: 1.13rem;
+  line-height: 2.1;
+  letter-spacing: 0.2px;
+  text-align: left;
+  position: relative;
+  p {
+    margin: 0 0 18px 0;
+    text-indent: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+  .desc-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-top: 9px;
+    border-radius: 50%;
+    background: #409EFF;
+    flex-shrink: 0;
+  }
+  .desc-key {
+    color: #409EFF;
+    font-weight: 600;
+  }
+}
+
+.welcome-card-btns {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.welcome-card-btn {
+  padding: 10px 32px;
+  font-size: 1.1rem;
+  border-radius: 24px;
+  border: 2px solid #409EFF;
+  background: #fff;
+  color: #409EFF;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.welcome-card-btn.primary {
+  background: linear-gradient(90deg, #409EFF 0%, #66b1ff 100%);
+  color: #fff;
+  border: none;
+}
+.welcome-card-btn:hover {
+  box-shadow: 0 2px 8px rgba(64,158,255,0.12);
+  transform: translateY(-2px) scale(1.04);
+  opacity: 0.92;
+}
+
+.logo-container {
+  margin-bottom: 30px;
+
+  img {
+    max-width: 180px;
+  }
+}
+
+.welcome-content {
+  h1 {
+    color: #1b82d7;
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: left;
+  }
+
+  p {
+    // color: #666;
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: left;
+  }
+
+  .sdk-demo-link {
+    display: inline-block;
+    color: #1b82d7;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 1px solid #1b82d7;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+
+    &:hover {
+      background-color: #1b82d7;
+      color: #fff;
+    }
+  }
+}

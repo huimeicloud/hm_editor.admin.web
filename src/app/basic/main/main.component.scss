@@ -1,0 +1,51 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.content-area {
+  display: flex;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  margin-top: 55px; /* 为顶部标签预留空间 */
+}
+
+.main-box {
+  flex: 1;
+  padding: 0;
+  overflow: auto;
+  margin-left: 0; /* 移除左边距 */
+  transition: margin-left 0.3s ease;
+  width: 100%; /* 使用100%宽度 */
+}
+
+:host ::ng-deep .siderHide + .main-box {
+  margin-left: 0; /* 收起侧边栏后也不需要边距 */
+  width: 100%;
+}
+
+:host ::ng-deep {
+  #layout-sidebar {
+    z-index: 10;
+    height: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  hm-common-sidebar {
+    height: 100%;
+    z-index: 10;
+    display: block;
+  }
+
+  hm-common-footer {
+    position: absolute;
+    top: 56px; /* 将标签置于顶部和内容区域之间 */
+    left: 0;
+    width: 100%;
+    z-index: 5;
+  }
+}

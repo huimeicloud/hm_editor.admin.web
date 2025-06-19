@@ -1,0 +1,9 @@
+<p-autoComplete [placeholder]="'数据元名称/编码'" [inputStyle]="{'width':width,'height':height}" [(ngModel)]="selDs" [suggestions]="filterDs"
+  (completeMethod)="filterDsFun($event)" appendTo="body" field="name" (onSelect)="selDsFun()">
+  <ng-template let-brand pTemplate="item">
+    <div style="width: 260px;display: flex;">
+      <span style="width: 60%;display: inline-block;">{{brand['name']}}</span>
+      <span style="width: 39%;display: inline-block;">{{brand['code']}}</span>
+    </div>
+  </ng-template>
+</p-autoComplete>

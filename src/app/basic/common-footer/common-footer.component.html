@@ -1,0 +1,20 @@
+<div class="common-footer" [class.siderHide]="!navDisplay">
+  <div class="menuMove" (click)="rightMoveMenu()"><</div>
+  <nav [ngStyle]="{'transform':moveLength}" style="margin-left: 18px; transition: all .5s;">
+    <ul id="footerMenu">
+      <li *ngFor="let menu of menus;let index=index" [routerLink]="[menu['URL']]" class="menu_item"
+           (click)="menuClick(index)" (mouseover)="mouseOver(index)" (mouseleave)="mouseLeave()"
+           [ngStyle]="{ 'background':selectedIndex==index? '#FFFFFF' : 'rgba(222,227,234,1)',
+           'color':selectedIndex==index? '#FF9900' : '#4A4A4A','border':'0px solid rgba(215,215,215,1)',
+           'border-top':selectedIndex==index? '0px solid rgb(242, 242, 242)':'0px solid rgba(215,215,215,1)',
+           'border-bottom':selectedIndex==index? '3px solid #FF9900':'3px solid rgba(222,227,234,1)'}"
+           [title]="menu['text']">
+           {{menu['text']}}
+        <img *ngIf="selectedIndex==index && !menu['isHomePage']" src="assets/img/activedMenu.png" style="margin-left: 20px;" (click)="closeMenu(index)"/>
+        <img *ngIf="selectedIndex!=index && !menu['isHomePage']" src="assets/img/footMenuGray.png" style="margin-left: 20px;"
+              (click)="closeMenu(index)" [ngStyle]="{'display':index == mouseOverIndex?'inline':'none'}"/>
+      </li>
+    </ul>
+  </nav>
+  <div class="menuMove" (click)="leftMoveMenu()" style="position: absolute;right: 0;margin-right: 0px;">></div>
+</div>

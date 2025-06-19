@@ -1,0 +1,65 @@
+.box{
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    display: flex;
+    .left{
+        width: 50%;
+    }
+    .right{
+        margin-left: 10px;
+        width: 50%;
+    }
+    .top{
+        width: 100%;
+        height: 60%;
+    }
+    .bottom{
+        display: flex;
+        width: 100%;
+        max-height: 40%;
+    }
+    .ops{
+        height: 26px;
+        margin: 3px 0;
+        padding: 0 0.5em;
+    }
+    .row{
+        display: flex;
+        padding: 0.5em;
+        label{
+            //padding: 0 5px;
+            min-width: 80px;
+            text-align: right;
+            padding-right: 10px;
+        }
+    }
+    .title{
+        display: block;
+        background: linear-gradient(180deg, #f9fafd, #e3e4e7);
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+}
+
+:host /deep/ .ui-state-highlight{
+    background-color: #4297fe !important;
+    color:#fff !important;
+}
+:host /deep/ .iconfont{
+    font-size: 1em !important;
+}
+:host /deep/ p-dialog .ui-widget.ui-dialog .ui-dialog-titlebar{
+    padding: 0.8em;
+}
+:host /deep/ p-dialog .ui-widget.ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon, p-dialog .ui-widget.ui-dialog .ui-dialog-titlebar .ui-dialog-title, .ui-dialog.ui-confirmdialog .ui-dialog-titlebar .ui-dialog-titlebar-icon, .ui-dialog.ui-confirmdialog .ui-dialog-titlebar .ui-dialog-title{
+    font-size: 14px;
+}
+:host /deep/ .row .ui-dropdown .ui-inputtext{
+
+    padding: unset !important;
+    padding-left: 3px !important;
+}
+:host /deep/ label.ui-dropdown-label{
+    padding-left: 3px !important;
+}

@@ -1,0 +1,137 @@
+/* 对话框样式优化 */
+
+/* 模板制作页面的对话框样式 */
+body .ui-dialog.ui-widget.ui-widget-content {
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  border: none;
+  overflow: hidden;
+  max-height: 90vh; /* 限制最大高度 */
+
+  .ui-dialog-titlebar {
+    background: #f0f7ff;
+    color: #333;
+    font-weight: bold;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+
+    .ui-dialog-title {
+      font-size: 16px;
+    }
+
+    .ui-dialog-titlebar-icon {
+      color: #666;
+      transition: color 0.3s;
+
+      &:hover {
+        color: #f44336;
+      }
+    }
+  }
+
+  .ui-dialog-content {
+    padding: 15px;
+    background: #ffffff;
+    max-height: calc(90vh - 140px); /* 确保内容不会太长 */
+    overflow-y: auto;
+  }
+
+  .ui-dialog-footer {
+    background: #f9f9f9;
+    border-top: 1px solid #e0e0e0;
+    padding: 10px 20px;
+    text-align: right;
+
+    button {
+      margin-left: 10px;
+    }
+  }
+
+  /* 表单样式优化 */
+  .ui-grid .ui-g-3 {
+    text-align: right;
+    padding-right: 15px;
+    font-weight: 500;
+  }
+
+  .ui-grid .ui-g-9 {
+    padding-left: 0;
+  }
+
+  .clearfix {
+    // margin-bottom: 15px;
+  }
+
+  /* 下拉框样式 */
+  p-dropdown .ui-dropdown {
+    // width: 100% !important;
+    border-radius: 3px;
+  }
+
+  /* 多选下拉框样式 */
+  p-multiSelect .ui-multiselect {
+    width: 100% !important;
+    border-radius: 3px;
+  }
+
+  /* 按钮样式 */
+  .ui-dialog-buttonpane {
+    button.ui-button {
+      border-radius: 3px;
+      padding: 5px 15px;
+      transition: all 0.3s;
+
+      &:first-child {
+        background-color: #f5f5f5;
+        color: #333;
+        border: 1px solid #ccc;
+
+        &:hover {
+          background-color: #e0e0e0;
+        }
+      }
+
+      &:last-child {
+        background-color: #1b82d7;
+        color: white;
+        border: 1px solid #0e6bba;
+
+        &:hover {
+          background-color: #0e6bba;
+        }
+      }
+    }
+  }
+}
+
+/* 弹出框内部输入控件样式 */
+.ui-fluid .ui-inputtext,
+.ui-fluid .ui-dropdown,
+.ui-fluid .ui-multiselect {
+  width: 100%;
+}
+
+/* 单选按钮样式 */
+.ui-radiobutton-box.ui-state-active {
+  border-color: #1b82d7;
+  background-color: #1b82d7;
+}
+
+p-radioButton {
+  margin-right: 20px;
+}
+
+/* 消息对话框样式优化 */
+body .ui-dialog.ui-confirmdialog {
+  .ui-dialog-content {
+    padding: 25px 20px;
+  }
+
+  .ui-dialog-footer {
+    padding: 10px 20px 15px;
+
+    button {
+      min-width: 80px;
+    }
+  }
+}

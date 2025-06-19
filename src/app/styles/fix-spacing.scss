@@ -1,0 +1,239 @@
+/* 修复布局间距问题 */
+
+/* 重置基本元素 */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 修复内容区域和侧边栏之间的间隙 */
+.content-area {
+  display: flex !important;
+  flex: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 确保侧边栏和内容区域无缝连接 */
+#layout-sidebar {
+  flex-shrink: 0;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.main-box {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-left: none !important;
+  overflow: auto;
+}
+
+/* 设置布局内容区域的顶部间距 */
+.layout-content {
+  padding-top: 96px !important;
+}
+
+/* 主内容区域也设置顶部边距 */
+.main-content {
+  padding-top: 70px !important;
+}
+
+/* 确保内容区域组件有正确的边距 */
+.content-container {
+  padding-top: 70px !important;
+}
+
+/* 修复表格样式 */
+.ui-datatable {
+  width: 100% !important;
+  margin: 0 !important;
+  border-collapse: collapse;
+}
+
+/* 确保所有p-table和p-dataTable正确显示 */
+p-dataTable .ui-datatable-tablewrapper {
+  overflow: visible !important;
+  width: 100% !important;
+}
+
+/* 优化数据表格样式 */
+.ui-datatable {
+  .ui-datatable-thead > tr > th {
+    background-color: #f0f7ff !important;
+    color: #333 !important;
+    font-weight: 600 !important;
+    padding: 10px 8px !important;
+    border-color: #e0e0e0 !important;
+    text-align: center !important;
+  }
+
+  .ui-datatable-tbody > tr {
+    transition: background-color 0.3s;
+
+    &:nth-child(even) {
+      background-color: #f9f9f9 !important;
+    }
+
+    &:hover {
+      background-color: #f0f7ff !important;
+    }
+
+    > td {
+      padding: 8px !important;
+      border-color: #e0e0e0 !important;
+      word-break: break-word !important; /* 确保长文本能够换行 */
+    }
+  }
+
+  .ui-datatable-footer {
+    background-color: #f9f9f9 !important;
+    padding: 10px !important;
+    font-weight: bold !important;
+    border-color: #e0e0e0 !important;
+  }
+
+  /* 空白数据提示 */
+  .ui-datatable-emptymessage {
+    td {
+      padding: 20px !important;
+      text-align: center !important;
+      color: #888 !important;
+    }
+  }
+}
+
+// /* 调整列宽 - 全局设置 */
+// .ui-datatable .ui-datatable-thead > tr > th:nth-child(1) {
+//   width: 60px !important; /* 序号列宽 */
+// }
+
+// .ui-datatable .ui-datatable-thead > tr > th:nth-child(6) {
+//   width: 180px !important; /* 操作列宽 */
+// }
+
+// .ui-datatable .ui-datatable-thead > tr > th:nth-child(5) {
+//   min-width: 300px !important; /* 数据集列宽 */
+// }
+
+/* 分页器样式 */
+.ui-paginator {
+  background-color: #f9f9f9 !important;
+  padding: 5px !important;
+  border-color: #e0e0e0 !important;
+
+  .ui-paginator-page.ui-state-active {
+    background-color: #1b82d7 !important;
+    color: white !important;
+  }
+
+  .ui-paginator-page:not(.ui-state-active):hover {
+    background-color: #e0e0e0 !important;
+  }
+}
+
+/* 修复页面布局中的间隙 */
+.main-container {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100vh !important;
+  width: 100vw !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 确保页脚不会在布局中产生不必要的空间 */
+hm-common-footer {
+  flex-shrink: 0;
+  z-index: 5;
+}
+
+/* 确保内容区域在布局中正确占据空间 */
+router-outlet + * {
+  display: block;
+  flex: 1;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+}
+
+/* 按钮样式优化 */
+button.ui-button {
+  &.ui-button-text-icon-left {
+    .ui-button-text {
+      padding: 0.3em 1em 0.3em 2.1em;
+    }
+  }
+
+  &.ui-button-success {
+    background-color: #4caf50 !important;
+    border-color: #4caf50 !important;
+
+    &:hover {
+      background-color: #43a047 !important;
+      border-color: #43a047 !important;
+    }
+  }
+
+  &.ui-button-warning {
+    background-color: #ff9800 !important;
+    border-color: #ff9800 !important;
+
+    &:hover {
+      background-color: #fb8c00 !important;
+      border-color: #fb8c00 !important;
+    }
+  }
+
+  &.ui-button-danger {
+    background-color: #f44336 !important;
+    border-color: #f44336 !important;
+
+    &:hover {
+      background-color: #e53935 !important;
+      border-color: #e53935 !important;
+    }
+  }
+
+  &.ui-button-info {
+    background-color: #1b82d7 !important;
+    border-color: #1b82d7 !important;
+
+    &:hover {
+      background-color: #0e6bba !important;
+      border-color: #0e6bba !important;
+    }
+  }
+}
+
+/* 搜索框和按钮对齐 */
+input[type="text"].ui-inputtext {
+  height: 22px !important;
+  border-radius: 3px !important;
+  border: 1px solid #ccc !important;
+  padding: 0 10px !important;
+  margin-right: 5px !important;
+}
+
+/* 列表内部按钮组样式 */
+.ui-button-text-only {
+  margin-right: 5px !important;
+  padding: 2px 8px !important;
+}
+
+/* 修复操作列按钮过于拥挤的问题 */
+p-dataTable .ui-datatable-tbody > tr > td:last-child {
+  white-space: nowrap !important;
+  text-align: center !important;
+
+  button {
+    margin: 0 2px !important;
+    padding: 3px 8px !important;
+  }
+}

@@ -1,0 +1,118 @@
+<div class="box">
+  <div class="left">
+    <span class="title">数据元值域列表</span>
+    <div style="margin: 3px 0 0 10px;height: 24px;">
+      <span style="font-size: 14px;">数据元值域共：{{dictRecord['total']}}</span>
+      <input style="width: 200px;float: right;height: 22px;" pInputText type="text" [(ngModel)]="dictFilterText"
+        [ngModelOptions]="{standalone: true}" (keyup)="dictFilterBlur($event)" placeholder="编码/名称" />
+    </div>
+    <p-dataTable [style]="{'max-height': 'calc(100% - 50px)','overflow':'auto','text-align':'center','width':'100%'}" 
+    [value]="dictRecord['data']" emptyMessage="暂无数据"  [totalRecords]="dictRecord['total']"  [lazy]="true"
+    (onLazyLoad)="loadDictLazy($event)" [(first)]="dictFirst"
+    [rows]="dictPageSize" selectionMode="single" [paginator]="true"  scrollable="true"
+      fixedPaginator="true" [pageLinks]="3" (onRowSelect)="dictRowSel($event)" [(selection)]="selDict"
+      >
+      <p-column header="值域编码" field="code"></p-column>
+      <p-column header="值域名称" field="name"></p-column>
+      <p-column header="引用数" field="count" [style]="{'width':'60px'}"></p-column>
+      <!-- <p-column header="版本号" field="version" [style]="{'width':'60px'}"></p-column> -->
+      <p-column header="启用状态" field="showStatus" [style]="{'width':'80px'}">
+      </p-column>
+    </p-dataTable>
+    <div class="ops">
+
+      <button pButton label="增加" icon="fa-plus" (click)="addDsDict()"></button>
+      <button pButton label="修改" icon="icon iconfont icon-edit1" (click)="editDsDict()"></button>
+      <button pButton label="删除" icon="icon iconfont icon-delete" (click)="delDict()"></button>
+      <!-- <button pButton label="导出" icon="icon iconfont icon-synchronize" (click)="exportDict()"></button> -->
+      <!-- <button pButton label="启用" icon="icon iconfont icon-edit1" (click)="addRow()"></button> -->
+    </div>
+  </div>
+  <div class="right">
+
+    <div>
+      <span class="title">值域数据项管理</span>
+      <div class="ops">
+        <button pButton label="增加" icon="fa-plus" (click)="addDictVerDataRow()"></button>
+        <button pButton label="修改" icon="icon iconfont icon-edit1" (click)="editorDictVerDataRow()"></button>
+        <button pButton label="删除" icon="icon iconfont icon-delete" (click)="delDictVerData()"></button>
+        <!-- <button pButton label="导出" icon="icon iconfont icon-synchronize" (click)="exportDict()"></button> -->
+      </div>
+      <p-dataTable [style]="{'max-height': '100%','overflow':'auto','text-align':'center'}" [value]="verDataList"
+        fixedPaginator="true" scrollable="true" selectionMode="single" [(selection)]="selVersionData" emptyMessage="暂无数据">
+        <p-column header="值" field="val"></p-column>
+        <p-column header="含义" field="description"></p-column>
+        <p-column header="计算值" field="calcVal"></p-column>
+        <p-column header="说明" field="remark"></p-column>
+        <p-column header="排序" field="order"></p-column>
+      </p-dataTable>
+      
+    </div>
+    <div>
+      <span class="title">值域引用情况</span>
+      <!-- <p-dataTable [style]="{'max-height': '100%','overflow':'auto','text-align':'center'}" [value]="refrenceList"
+        fixedPaginator="true" scrollable="true">
+        <p-column header="数据元编码" field="code"></p-column>
+        <p-column header="数据元名称" field="name"></p-column>
+      </p-dataTable> -->
+
+      <p-dataTable [style]="{'max-height': '100%','overflow':'auto','text-align':'center'}" [value]="refrenceList"
+        fixedPaginator="true" scrollable="true" emptyMessage="暂无数据">
+        <p-column header="数据元编码" field="code"></p-column>
+        <p-column header="数据元名称" field="name"></p-column>
+      </p-dataTable>
+
+    </div>
+  </div>
+
+  <!-- 值域 -->
+  <p-dialog [header]="dsDictDiagTitle" [(visible)]="dsDictDiag" modal="true" closeOnEscape="false" [responsive]="true">
+    <div class="row">
+      <label>编码</label><input pInputText type="text" [(ngModel)]="editorDsDict['code']"
+        [ngModelOptions]="{standalone: true}" [disabled]="!!editorDsDict['_id']" />
+    </div>
+    <div class="row">
+      <label>名称</label><input pInputText type="text" [(ngModel)]="editorDsDict['name']"
+        [ngModelOptions]="{standalone: true}" />
+    </div>
+    <div class="row">
+      <label>启用状态</label><p-inputSwitch [(ngModel)]="editorDsDict['status']"></p-inputSwitch>
+    </div>
+    <div class="ops center">
+      <button pButton label="确认" icon="iconfont icon-ensure" (click)="confirmEditDict()"></button>
+      <button pButton label="取消" icon="iconfont icon-cancel" (click)="this.dsDictDiag = false"></button>
+    </div>
+  </p-dialog>
+
+
+  <p-dialog [header]="dsDictVerDataDiagTitle" [(visible)]="dsDictVerDataDiag" modal="true" closeOnEscape="false"
+    [responsive]="true">
+    <div class="row">
+      <label>值</label><input pInputText type="text" [(ngModel)]="editorDsDictVerData['val']"
+        [ngModelOptions]="{standalone: true}" />
+    </div>
+    <div class="row">
+      <label>值含义</label><input pInputText type="text" [(ngModel)]="editorDsDictVerData['description']"
+        [ngModelOptions]="{standalone: true}" />
+    </div>
+    <div class="row">
+      <label>计算值</label><input pInputText type="text" [(ngModel)]="editorDsDictVerData['calcVal']"
+        [ngModelOptions]="{standalone: true}" />
+    </div>
+
+    <div class="row">
+      <label>说明</label><input pInputText type="text" [(ngModel)]="editorDsDictVerData['remark']"
+        [ngModelOptions]="{standalone: true}" />
+    </div>
+    <div class="row">
+      <label>排序</label><input pInputText type="number" min="1" step="1" [(ngModel)]="editorDsDictVerData['order']"
+        [ngModelOptions]="{standalone: true}" />
+    </div>
+    <div class="ops center">
+      <button pButton label="确认" icon="iconfont icon-ensure" (click)="confirmDictVerData()"></button>
+      <button pButton label="取消" icon="iconfont icon-cancel" (click)="this.dsDictVerDataDiag = false"></button>
+    </div>
+
+  </p-dialog>
+</div>
+<p-growl [(value)]="msgs" [life]=5000></p-growl>

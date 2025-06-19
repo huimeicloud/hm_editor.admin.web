@@ -1,0 +1,66 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "hm_editor.admin.web"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "hm_editor.admin.web",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "tsconfig": "tsconfig.app.json",
+      "prefix": "hm",
+      "styles": [
+        "app/styles/theme.scss",
+        "assets/hm_editor-admin/iconfont.css",
+        "../node_modules/jquery.json-viewer/json-viewer/jquery.json-viewer.css"
+      ],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/jquery.json-viewer/json-viewer/jquery.json-viewer.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json"
+    }
+  ],
+  "defaults": {
+    "styleExt": "scss",
+    "component": {
+      "spec": false
+    },
+    "directive": {
+      "spec": false
+    },
+    "guard": {
+      "spec": false
+    },
+    "interface": {
+    },
+    "module": {
+      "spec": false
+    },
+    "pipe": {
+      "spec": false
+    },
+    "service": {
+      "spec": false
+    },
+    "serve": {
+      "port": 2080
+    }
+  }
+}

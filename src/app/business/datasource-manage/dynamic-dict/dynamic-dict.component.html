@@ -1,0 +1,108 @@
+<div class="box">
+  <div class="top">
+    <span class="title">动态值域列表</span>
+    <div style="margin: 2px 0 2px 5px;display: inline-block;width: calc(100% - 500px);">
+      <span style="font-size: 14px;">动态值域共：{{totalRecords}}</span>
+      <input style="width: 200px;float: right;" pInputText type="text" [(ngModel)]="filterText"
+        [ngModelOptions]="{standalone: true}" (keyup)="filterDynamicDict($event)" placeholder="编码/名称/标签" />
+    </div>
+    <div class="ops">
+      <button pButton label="查询" icon="fa-search" (click)="pageNo=1;first=0;loadDynamicDictList()"></button>
+      <button pButton label="增加" icon="fa-plus" (click)="addDynamicDict()"></button>
+      <button pButton label="修改" icon="icon iconfont icon-edit1" (click)="editDynamicDictRow()"></button>
+      <button pButton label="删除" icon="icon iconfont icon-delete" (click)="deleteDynamicDict()"></button>
+    </div>
+
+    <p-dataTable [style]="{'max-height': 'calc(100% - 40px)','overflow':'auto','text-align':'center'}"
+      [value]="dynamicDictList"
+      selectionMode="single"
+      [(selection)]="selectedDynamicDict"
+      [paginator]="true"
+      [rows]="pageSize"
+      [totalRecords]="totalRecords"
+      fixedPaginator="true"
+      scrollable="true"
+      [pageLinks]="3"
+      emptyMessage="暂无数据"
+      [(first)]="first"
+      [lazy]="true"
+      (onLazyLoad)="loadLazy($event)">
+
+      <p-column header="值域编码" field="code" [style]="{'width':'80px'}"></p-column>
+      <p-column header="值域名称" field="name" [style]="{'width':'100px'}"></p-column>
+      <p-column header="值域编码" field="code"></p-column>
+      <p-column header="值域名称" field="name"></p-column>
+      <p-column header="请求URL" field="url" 
+                [style]="{'width':'300px', 'white-space':'normal', 'word-break':'break-all'}"></p-column>
+      <p-column header="标签" field="tag"></p-column>
+      <p-column header="入参示例" field="paramExample"></p-column>
+      <p-column header="维护时间" field="createTime">
+        <ng-template let-col let-rd="rowData" let-index="rowIndex" pTemplate="body">
+          <div class="url-cell">{{rd['url']}}</div>
+        </ng-template>
+      </p-column>
+      <p-column header="标签" field="tag" [style]="{'width':'120px'}">
+        <ng-template let-col let-rd="rowData" let-index="rowIndex" pTemplate="body">
+          <div class="ellipsis-cell" [title]="rd['tag']">{{rd['tag']}}</div>
+        </ng-template>
+      </p-column>
+      <p-column header="入参示例" field="paramExample" [style]="{'width':'150px'}">
+        <ng-template let-col let-rd="rowData" let-index="rowIndex" pTemplate="body">
+          <div class="ellipsis-cell" [title]="rd['paramExample']">{{rd['paramExample']}}</div>
+        </ng-template>
+      </p-column>
+      <p-column header="维护时间" field="createTime" [style]="{'width':'120px'}">
+        <ng-template let-col let-rd="rowData" let-index="rowIndex" pTemplate="body">
+          <span>{{rd['createTime'] | date:'MM-dd HH:mm'}}</span>
+        </ng-template>
+      </p-column>
+    </p-dataTable>
+  </div>
+
+  <p-growl [(value)]="msgs" [life]=5000></p-growl>
+
+  <p-dialog [header]="dialogTitle" [(visible)]="displayDialog" modal="true" closeOnEscape="false" [responsive]="true">
+    <div class="dialog-form">
+      <div class="row">
+        <label>值域编码</label>
+        <input pInputText type="text" [(ngModel)]="editDynamicDict.code" [ngModelOptions]="{standalone: true}" [disabled]="isNewRecord" placeholder="新增时系统自动生成" />
+        <label>值域名称</label>
+        <input pInputText type="text" [(ngModel)]="editDynamicDict.name" [ngModelOptions]="{standalone: true}" />
+      </div>
+      <div class="row">
+        <label>请求URL</label>
+        <input pInputText type="text" [(ngModel)]="editDynamicDict.url" [ngModelOptions]="{standalone: true}" style="width: 95%" />
+      </div>
+      <div class="row hidden">
+        <label>返回CODE</label>
+        <input pInputText type="text" [(ngModel)]="editDynamicDict.returnCode" [ngModelOptions]="{standalone: true}" />
+        <label>返回NAME</label>
+        <input pInputText type="text" [(ngModel)]="editDynamicDict.returnName" [ngModelOptions]="{standalone: true}" />
+      </div>
+      <div class="row hidden">
+        <label>返回扩展1</label>
+        <input pInputText type="text" [(ngModel)]="editDynamicDict.returnExt1" [ngModelOptions]="{standalone: true}" />
+        <label>返回扩展2</label>
+        <input pInputText type="text" [(ngModel)]="editDynamicDict.returnExt2" [ngModelOptions]="{standalone: true}" />
+      </div>
+      <div class="row hidden">
+        <label>显示内容</label>
+        <input pInputText type="text" [(ngModel)]="editDynamicDict.displayContent" [ngModelOptions]="{standalone: true}" style="width: 95%" />
+      </div>
+      <div class="row">
+        <label>标签</label>
+        <input pInputText type="text" [(ngModel)]="editDynamicDict.tag" [ngModelOptions]="{standalone: true}" style="width: 95%" />
+      </div>
+      <div class="row">
+        <label style="vertical-align: top;">入参示例</label>
+        <textarea pInputTextarea rows="3" [(ngModel)]="editDynamicDict.paramExample" [ngModelOptions]="{standalone: true}" style="width: 95%"></textarea>
+      </div>
+    </div>
+    <div class="ops center">
+      <button pButton label="确认" icon="iconfont icon-ensure" (click)="saveDynamicDict()"></button>
+      <button pButton label="取消" icon="iconfont icon-cancel" (click)="cancelDialog()"></button>
+    </div>
+  </p-dialog>
+
+  <p-confirmDialog acceptLabel="确认" rejectLabel="取消"></p-confirmDialog>
+</div>

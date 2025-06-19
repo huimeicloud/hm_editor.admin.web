@@ -1,0 +1,109 @@
+<div class="box">
+  <div class="top">
+    <span class="title">数据元列表</span>
+    <div style="margin: 3px 0 3px 10px;display: inline-block;width: calc(100% - 380px);">
+      <span style="font-size: 14px;">数据元共：{{dsRecord['total']}}</span>
+      <input style="width: 200px;float: right;" pInputText type="text" [(ngModel)]="dsFilterText"
+        [ngModelOptions]="{standalone: true}" (keyup)="dsFilterBlur($event)" placeholder="数据元标识符/名称" />
+    </div>
+    <div class="ops">
+      <button pButton label="查询" icon="fa-search" (click)="dsFirst = 0;dsPageNo = 1;search();"></button>
+      <button pButton label="增加" icon="fa-plus" (click)="addDsRow()"></button>
+      <button pButton label="修改" icon="icon iconfont icon-edit1" (click)="editorDsRow()"></button>
+      <button pButton label="删除" icon="icon iconfont icon-delete" (click)="delDsRow()"></button>
+      <!-- <button pButton label="导出" icon="icon iconfont icon-synchronize" (click)="exportDict()"></button> -->
+      <!-- <button pButton label="启用" icon="icon iconfont icon-edit1" (click)="addRow()"></button> -->
+    </div>
+    <p-dataTable [style]="{'max-height': 'calc(100% - 65px)','overflow':'auto','text-align':'center'}" [value]="dsRecord['data']"
+      selectionMode="single" [paginator]="true" [rows]="dsPageSize" [totalRecords]="dsRecord['total']"
+      fixedPaginator="true" scrollable="true" [pageLinks]="3" (onRowSelect)="dsRowSel($event)" [(selection)]="selDs"
+      emptyMessage="暂无数据" [(first)]="dsFirst" [lazy]="true" (onLazyLoad)="loadDsLazy($event)">
+      <p-column header="数据元标识符" field="code"></p-column>
+      <p-column header="数据元名称" field="name"></p-column>
+      <p-column header="定义" field="description"></p-column>
+      <p-column header="值的类型" field="type"></p-column>
+      <p-column header="表示格式" field="format">
+        <ng-template let-col let-rd="rowData" let-index="rowIndex" pTemplate="body">
+          <span>{{showFormat(rd)}}</span>
+        </ng-template>
+      </p-column>
+      <p-column header="数据元允许值" field="dictCode"></p-column>
+        <p-column header="维护时间" field="createTime">
+          <ng-template let-col let-rd="rowData" let-index="rowIndex" pTemplate="body">
+            <span>{{rd['createTime'] | date:'y-MM-dd HH:mm'}}</span>
+          </ng-template>
+        </p-column>
+    </p-dataTable>
+
+  </div>
+  <div class="bottom">
+
+    <div class="left">
+      <span class="title">数据元对应值域信息</span>
+      <p-dataTable [style]="{'max-height': '100%','overflow':'auto','text-align':'center'}" [value]="verDataList"
+        fixedPaginator="true" scrollable="true" emptyMessage="暂无数据">
+        <p-column header="值" field="val"></p-column>
+        <p-column header="含义" field="description"></p-column>
+        <p-column header="计算值" field="calcVal"></p-column>
+        <p-column header="说明" field="remark"></p-column>
+        <!-- <p-column header="排序" field="order"></p-column> -->
+      </p-dataTable>
+    </div>
+    <div class="right">
+      <span class="title">数据元引用情况</span>
+
+      <p-dataTable [style]="{'max-height': '100%','overflow':'auto','text-align':'center'}" [value]="refrenceList"
+        fixedPaginator="true" scrollable="true" emptyMessage="暂无数据">
+        <p-column header="引用类型" field="type"></p-column>
+        <p-column header="编码" field="code"></p-column>
+        <p-column header="名称" field="name"></p-column>
+        <!-- <p-column header="排序" field="order"></p-column> -->
+      </p-dataTable>
+    </div>
+  </div>
+
+
+  <p-dialog [header]="dsDiagTitle" [(visible)]="dsDiag" modal="true" closeOnEscape="false" [responsive]="true">
+    <div class="row">
+      <label>数据元标识符</label>
+      <input pInputText type="text" [(ngModel)]="editorDs['code']"
+        [ngModelOptions]="{standalone: true}" [disabled]="true" />
+      <label>数据元名称</label>
+      <input pInputText type="text" [(ngModel)]="editorDs['name']"
+        [ngModelOptions]="{standalone: true}"  [disabled]="!!editorDs['_id']" (blur)="generalCode(editorDs)"/>
+    </div>
+    <div class="row">
+      <label>定义</label><input pInputText type="text" [(ngModel)]="editorDs['description']"
+        [ngModelOptions]="{standalone: true}" style="width: 400px;"/>
+    </div>
+    <div class="row">
+      <label>数据类型</label>
+      <p-dropdown [options]="types" [(ngModel)]="editorDs['type']" appendTo="body" [ngClass]="'clear-padding'" [style]="{'height': '22px','width': '60px'}"></p-dropdown>
+
+      <label>表示格式</label>
+      <p-dropdown [options]="stypes" [(ngModel)]="editorDs['format']" appendTo="body"  [style]="{'height': '22px','width': '60px'}"  [disabled]="!!editorDs['_id']" ></p-dropdown>
+
+      <input pInputText type="text" [(ngModel)]="editorDs['length']"
+        [ngModelOptions]="{standalone: true}" style="width:40px;height: 22px;margin: 0 5px 0 3px;" (blur)="checkDsLen()"  [disabled]="!!editorDs['_id']" />
+      <label>数据元允许值</label>
+      <p-dropdown [options]="dicts" [(ngModel)]="editorDs['dictCode']" filter="true" appendTo="body"  [style]="{'height': '22px','width': '70px'}"  filterBy="label,value">
+        <ng-template let-item pTemplate="selectedItem">
+
+            <span style="vertical-align:middle; margin-left: .5em">{{item.label}}</span>
+        </ng-template>
+        <ng-template let-car pTemplate="item">
+            <div class="ui-helper-clearfix" style="position: relative;height: 24px;display: flex;">
+                <div style="margin-top:4px">{{car.label}}</div>
+                <div style="margin-top:4px;margin-left: 10px;">{{car.value}}</div>
+            </div>
+        </ng-template>
+    </p-dropdown>
+    </div>
+    <div class="ops center">
+      <button pButton label="确认" icon="iconfont icon-ensure" (click)="confirmDsDiag()"></button>
+      <button pButton label="取消" icon="iconfont icon-cancel" (click)="this.dsDiag = false;"></button>
+    </div>
+  </p-dialog>
+</div>
+
+<p-growl [(value)]="msgs" [life]=5000></p-growl>

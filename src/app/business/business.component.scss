@@ -1,0 +1,22 @@
+.business-container {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
+.layout-content {
+  position: relative;
+  transition: all 0.5s;
+  margin-left: 0;
+  display: block;
+  width: 100%;
+  margin-top: 0;
+  overflow: auto;
+  padding-top: 30px;
+}
+
+.layout-content.siderHide {
+  width: 100%;
+  margin-left: 0;
+}

@@ -1,0 +1,71 @@
+#layout-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  display: block;
+  padding: 0;
+  height: 56px;
+  width: 100%;
+  z-index: 100;
+  // background: #409EFF;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+#sysLogo{
+  width: 220px;
+  height: 56px;
+  line-height: 56px;
+  //background: #29c3e8;
+  display: flex;
+  align-items: center;
+  transition: all 0.5s;
+  background: #409EFF;
+}
+
+#sysLogo.hide{
+  width: 50px;
+  justify-content: center;
+}
+
+#logoContent{
+  width: 188px;
+  height: 24px;
+  font-size: 16px;
+  font-family: DFPZongYiW7;
+  color: #fff;
+  line-height: 24px;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+#logoContent.hide{
+ display: none;
+}
+
+#logo {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+}
+
+.iconfont{
+  position:absolute;
+  top:20px;
+  left:230px;
+  transition: all 0.5s;
+  // color: #fff;
+}
+#rightValue{
+  position: fixed;
+  right: 20px;
+  top: 18px;
+  font-size: 16px;
+  color: #fff;
+}
+
+.iconfont.icon-menu-pack-up{
+  left:60px;
+}
