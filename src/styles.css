@@ -54,6 +54,7 @@ span {
   background: linear-gradient(to right, #3b55e7 , #008ce7); /* 标准的语法 */
   background: #4a90e2;
   box-shadow:0px 2px 4px 0px rgba(101,129,162,0.43);
+  padding:0 20px;
 }
 
 #layout-topbar .menu-button {
@@ -865,4 +866,24 @@ router-outlet ~ hm-common-sidebar {
 /* 隐藏字段的样式 */
 .hidden {
   display: none !important;
+}
+
+table, .ui-table, .ui-datatable, .ui-table table, .ui-datatable-tablewrapper table {
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th, .ui-table td, .ui-table th, .ui-datatable td, .ui-datatable th {
+  border: 1px solid #f0f0f0 !important;
+  height: 44px !important;
+  line-height: 44px !important;
+  background: #fff;
+  color: #333;
+  font-size: 14px;
+  padding: 0 12px;
+}
+tr {
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+.ui-table .ui-table-tbody > tr:hover, .ui-datatable .ui-datatable-data > tr:hover {
+  background: #f4f8fd !important;
 }

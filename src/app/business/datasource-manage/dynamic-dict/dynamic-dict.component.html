@@ -1,7 +1,7 @@
 <div class="box">
   <div class="top">
     <span class="title">动态值域列表</span>
-    <div style="margin: 2px 0 2px 5px;display: inline-block;width: calc(100% - 500px);">
+    <div style="margin: 0px 0 6px 5px;display: inline-block;width: calc(100% - 500px);">
       <span style="font-size: 14px;">动态值域共：{{totalRecords}}</span>
       <input style="width: 200px;float: right;" pInputText type="text" [(ngModel)]="filterText"
         [ngModelOptions]="{standalone: true}" (keyup)="filterDynamicDict($event)" placeholder="编码/名称/标签" />
