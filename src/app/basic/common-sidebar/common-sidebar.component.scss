@@ -58,6 +58,9 @@
       color: #409EFF !important;
       font-weight: 700;
     }
+    >li:first-child{
+        border-bottom: 1px solid #d8e8fa;
+    }
     .ul-child {
       display: none;
       padding-left: 10px;
