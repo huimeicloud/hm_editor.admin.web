@@ -875,8 +875,6 @@ table, .ui-table, .ui-datatable, .ui-table table, .ui-datatable-tablewrapper tab
 td, th, .ui-table td, .ui-table th, .ui-datatable td, .ui-datatable th {
   border: 1px solid #f0f0f0 !important;
   height: 44px !important;
-  /* line-height: 44px !important; */
-  /* background: #fff; */
   color: #333;
   font-size: 14px;
   padding: 0 12px;
