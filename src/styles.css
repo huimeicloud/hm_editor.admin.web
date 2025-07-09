@@ -876,7 +876,7 @@ td, th, .ui-table td, .ui-table th, .ui-datatable td, .ui-datatable th {
   border: 1px solid #f0f0f0 !important;
   height: 44px !important;
   line-height: 44px !important;
-  background: #fff;
+  /* background: #fff; */
   color: #333;
   font-size: 14px;
   padding: 0 12px;
@@ -884,6 +884,4 @@ td, th, .ui-table td, .ui-table th, .ui-datatable td, .ui-datatable th {
 tr {
   border-bottom: 1px solid #f0f0f0 !important;
 }
-.ui-table .ui-table-tbody > tr:hover, .ui-datatable .ui-datatable-data > tr:hover {
-  background: #f4f8fd !important;
-}
+
