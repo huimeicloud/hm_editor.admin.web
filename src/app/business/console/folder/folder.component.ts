@@ -29,9 +29,9 @@ export class FolderComponent implements OnInit {
   isCreateEmrBaseTemplate = false;
   displayEmrBaseTemplateDialog = false;
   templateTypeList = [
-    {name: '住院', code: '住院'},
-    {name: '门诊', code: '门诊'},
-    {name: '急诊', code: '急诊'},
+    {label: '住院', value: '住院', name: '住院', code: '住院'},
+    {label: '门诊', value: '门诊', name: '门诊', code: '门诊'},
+    {label: '急诊', value: '急诊', name: '急诊', code: '急诊'},
   ];
   searchTemplateTypeList = [{name: '请选择', code: ''}].concat(this.templateTypeList);
   folderList = [];
