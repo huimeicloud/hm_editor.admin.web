@@ -36,21 +36,6 @@
                 [style]="{'width':'300px', 'white-space':'normal', 'word-break':'break-all'}"></p-column>
       <p-column header="标签" field="tag"></p-column>
       <p-column header="入参示例" field="paramExample"></p-column>
-      <p-column header="维护时间" field="createTime">
-        <ng-template let-col let-rd="rowData" let-index="rowIndex" pTemplate="body">
-          <div class="url-cell">{{rd['url']}}</div>
-        </ng-template>
-      </p-column>
-      <p-column header="标签" field="tag" [style]="{'width':'120px'}">
-        <ng-template let-col let-rd="rowData" let-index="rowIndex" pTemplate="body">
-          <div class="ellipsis-cell" [title]="rd['tag']">{{rd['tag']}}</div>
-        </ng-template>
-      </p-column>
-      <p-column header="入参示例" field="paramExample" [style]="{'width':'150px'}">
-        <ng-template let-col let-rd="rowData" let-index="rowIndex" pTemplate="body">
-          <div class="ellipsis-cell" [title]="rd['paramExample']">{{rd['paramExample']}}</div>
-        </ng-template>
-      </p-column>
       <p-column header="维护时间" field="createTime" [style]="{'width':'120px'}">
         <ng-template let-col let-rd="rowData" let-index="rowIndex" pTemplate="body">
           <span>{{rd['createTime'] | date:'MM-dd HH:mm'}}</span>
