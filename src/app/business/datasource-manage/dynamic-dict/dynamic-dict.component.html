@@ -1,7 +1,7 @@
 <div class="box">
   <div class="top">
     <span class="title">动态值域列表</span>
-    <div style="margin: 2px 0 2px 5px;display: inline-block;width: calc(100% - 500px);">
+    <div style="margin: 0px 0 6px 5px;display: inline-block;width: calc(100% - 500px);">
       <span style="font-size: 14px;">动态值域共：{{totalRecords}}</span>
       <input style="width: 200px;float: right;" pInputText type="text" [(ngModel)]="filterText"
         [ngModelOptions]="{standalone: true}" (keyup)="filterDynamicDict($event)" placeholder="编码/名称/标签" />
@@ -36,21 +36,6 @@
                 [style]="{'width':'300px', 'white-space':'normal', 'word-break':'break-all'}"></p-column>
       <p-column header="标签" field="tag"></p-column>
       <p-column header="入参示例" field="paramExample"></p-column>
-      <p-column header="维护时间" field="createTime">
-        <ng-template let-col let-rd="rowData" let-index="rowIndex" pTemplate="body">
-          <div class="url-cell">{{rd['url']}}</div>
-        </ng-template>
-      </p-column>
-      <p-column header="标签" field="tag" [style]="{'width':'120px'}">
-        <ng-template let-col let-rd="rowData" let-index="rowIndex" pTemplate="body">
-          <div class="ellipsis-cell" [title]="rd['tag']">{{rd['tag']}}</div>
-        </ng-template>
-      </p-column>
-      <p-column header="入参示例" field="paramExample" [style]="{'width':'150px'}">
-        <ng-template let-col let-rd="rowData" let-index="rowIndex" pTemplate="body">
-          <div class="ellipsis-cell" [title]="rd['paramExample']">{{rd['paramExample']}}</div>
-        </ng-template>
-      </p-column>
       <p-column header="维护时间" field="createTime" [style]="{'width':'120px'}">
         <ng-template let-col let-rd="rowData" let-index="rowIndex" pTemplate="body">
           <span>{{rd['createTime'] | date:'MM-dd HH:mm'}}</span>

@@ -8,37 +8,34 @@
   height: 56px;
   width: 100%;
   z-index: 100;
-  background: -webkit-linear-gradient(left, #3b55e7 , #008ce7); /* Safari 5.1 - 6.0 */
-  background: -o-linear-gradient(right, #3b55e7, #008ce7); /* Opera 11.1 - 12.0 */
-  background: -moz-linear-gradient(right, #3b55e7, #008ce7); /* Firefox 3.6 - 15 */
-  background: linear-gradient(to right, #3b55e7 , #008ce7); /* 标准的语法 */
-  background: #4a90e2;
-  background:rgba(233,238,241,1);
-  box-shadow:0px 2px 4px 0px rgba(101,129,162,0.43);
+  background: linear-gradient(to right, #409EFF 60%, #3b55e7 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  padding:0 20px;
 }
 
 #sysLogo{
-  width: 220px;
+  width: 250px;
   height: 56px;
   line-height: 56px;
-  //background: #29c3e8;
   display: flex;
   align-items: center;
-  transition: all 0.5s;
-  background: linear-gradient(180deg,#78c2fa,#2d99ea);
+  transition: width 0.3s;
+  background: #409EFF;
 }
 
 #sysLogo.hide{
-  width: 50px;
+  width: 34px;
   justify-content: center;
 }
 
 #logoContent{
   width: 188px;
   height: 24px;
-  font-size: 20px;
+  font-size: 16px;
   font-family: DFPZongYiW7;
-  color: rgba(255,255,255,1);
+  color: #fff;
   line-height: 24px;
   display: inline-block;
   text-align: center;
@@ -54,21 +51,29 @@
   display: inline-block;
   width: 24px;
   height: 24px;
+  margin-right: 10px;
 }
 
 .iconfont{
   position:absolute;
-  top:20px;
-  left:230px;
-  transition: all 0.5s;
+  top:16px;
+  left:258px;
+  color: #fff;
+  font-size: 20px;
+  transition: left 0.3s;
 }
 #rightValue{
   position: fixed;
   right: 20px;
   top: 18px;
   font-size: 16px;
+  color: #fff;
 }
 
 .iconfont.icon-menu-pack-up{
   left:60px;
+}
+
+#sysLogo.hide ~ .iconfont {
+  left: 60px;
 }

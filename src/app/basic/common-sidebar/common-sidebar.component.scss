@@ -1,8 +1,8 @@
 .sidebar {
   padding-top: 0;
-  background-color: #252c36;
-  color: #3c4144;
-  transition: all 0.5s;
+  background-color: #f4f8fd;
+  color: #222;
+  transition: width 0.3s;
   font: 400 14px/2 "Microsoft YaHei",helvetica, arial, verdana, sans-serif;
   height: 100%;
   width: 220px;
@@ -10,23 +10,30 @@
   display: block;
   box-sizing: border-box;
   border-right: none;
+  box-shadow: 1px 0 4px rgba(64,158,255,0.04);
   li {
     list-style: none;
+    color: #222 !important;
+    font-weight: 400;
   }
   li:hover {
     cursor: pointer;
-    background: #29426B;
-    transition: all .5s ease;
+    background: #e6f7ff;
+    color: #409EFF !important;
+    font-weight: 500;
+    transition: all .3s ease;
   }
   i {
     margin-right: 5px;
     font-size: 18px;
     position: relative;
     top: 3px;
+    color: #409EFF;
   }
   .sidebar-title {
-    height: 50px;
-    line-height: 50px;
+    color: #222 !important;
+    font-weight: 400;
+    padding: 5px 0;
   }
   .ul-parent {
     padding-left: 0;
@@ -35,10 +42,24 @@
     height: calc(100% - 56px);
     >li {
       padding-left: 10px;
-      border-left: solid transparent 4px;
+      border-left: solid 4px transparent;
+      background: transparent;
+      color: #222 !important;
+      font-weight: 400;
+      transition: color 0.2s;
     }
     >li.active{
-      border-left-color:#3b55e7;
+      border-left-color: #409EFF;
+      background: #fff;
+      color: #409EFF !important;
+      font-weight: 700;
+    }
+    >li.active .sidebar-title {
+      color: #409EFF !important;
+      font-weight: 700;
+    }
+    >li:first-child{
+        border-bottom: 1px solid #d8e8fa;
     }
     .ul-child {
       display: none;
@@ -46,10 +67,25 @@
       margin: 0;
       i {
         font-size: 14px;
+        color: #409EFF;
+      }
+      li {
+        color: #222 !important;
+        font-weight: 400;
+        transition: color 0.2s;
       }
       li:hover div{
-        color:#EFC540;
-       }
+        color: #409EFF !important;
+        font-weight: 500;
+      }
+      div {
+        color: #222 !important;
+        font-weight: 400;
+      }
+      div.active, li.active div {
+        color: #409EFF !important;
+        font-weight: 700;
+      }
     }
     .ul-child.submenu-show{
       padding-bottom: 6px;
@@ -76,19 +112,21 @@
   .sidebar-label{
     display: block;
     width: 100%;
-    line-height: 20px;
+    line-height: normal;
     white-space: normal;
     text-align: left;
+    margin-top: -12px;
+    padding-bottom: 4px;
     padding-left: 6px;
-    padding-bottom: 6px;
   }
   .ul-parent {
     .ul-child {
       position: absolute;
-      background: #252c36;
+      background: rgb(235, 244, 255);
       left: 51px;
       border-radius: 3px;
       padding-left: 0px;
+      box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, .1);
       li{
         padding:3px 20px;
       }
@@ -102,12 +140,12 @@
 /* 移除固定定位，使用相对定位 */
 #layout-sidebar {
   height: 100%;
-  background-color: #252c36;
-  color:#D8E3ED;
+  background-color: rgb(235, 244, 255);
+  color: #222;
   width: 220px;
-  padding-top: 70px;
+  padding-top: 57px;
   border-right: none;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
 }
 
 .submenu-hide {

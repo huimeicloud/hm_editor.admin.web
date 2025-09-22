@@ -32,7 +32,7 @@ export class CommonSidebarComponent implements OnInit {
     this.items = [
       {
         "label": "首页",
-        "icon": "icon iconfont icon-home",
+        // "icon": "icon iconfont icon-home",
         "url": "/main/business/welcome",
         "routerLink": "/main/business/welcome",
         "expanded": false,
@@ -40,7 +40,7 @@ export class CommonSidebarComponent implements OnInit {
       },
       {
         "label":"模板管理",
-        "icon": "icon iconfont icon-edit1",
+        // "icon": "icon iconfont icon-edit1",
         "url": "",
         "routerLink": "",
         "expanded": true,

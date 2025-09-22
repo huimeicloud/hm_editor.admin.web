@@ -1,6 +1,6 @@
 .common-footer{
   width: calc(100vw - 220px);
-  background: rgba(234,236,240,1);
+  background: #f7fafd;
   height: 40px;
   z-index: 9;
   display: flex;
@@ -10,7 +10,9 @@
   top: 0;
   left: 220px;
   transition: all 0.5s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 4px rgba(64,158,255,0.04);
+  border-bottom: 1px solid #f0f0f0;
+  padding-top: 2px;
 }
 .common-footer.siderHide{
   left: 50px;
@@ -19,17 +21,30 @@
 .menu_item{
   display: inline-block;
   color: #4A4A4A;
-  background: rgba(222,227,234,1);
+  background: #f0f4fa;
   cursor: pointer;
   line-height: 37px;
   height: 37px;
   text-align: center;
   margin-left: 2px;
-  min-width: 140px;
-  padding: 0 10px;
+  min-width: 120px;
+  padding: 0 16px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  border-radius: 6px 6px 0 0;
+  border: 1px solid transparent;
+  transition: background 0.2s, color 0.2s;
+}
+.menu_item:hover {
+  background: #e6f7ff;
+  color: #409EFF;
+}
+.menu_item.selected, .menu_item[aria-selected="true"] {
+  background: #fff;
+  color: #409EFF;
+  border-bottom: 2px solid #409EFF;
+  font-weight: 600;
 }
 .menu_item span{
   font-size: 10px;
@@ -39,14 +54,20 @@
 }
 .menuMove{
   width: 18px;
-  height: 40px;
-  background: rgba(222,227,234,1);
+  height: 37px;
+  background: #f0f4fa;
   text-align: center;
-  line-height: 40px;
-  color: #BFC9D3;
+  line-height: 37px;
+  color: #bfc9d3;
   z-index: 100;
   cursor: pointer;
   position: absolute;
+  border-radius: 0 6px 6px 0;
+  transition: background 0.2s;
+}
+.menuMove:hover {
+  background: #e6f7ff;
+  color: #409EFF;
 }
 :focus {
   outline:none;

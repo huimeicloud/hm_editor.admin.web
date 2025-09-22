@@ -10,8 +10,8 @@ import {MainComponent} from "./basic/main/main.component";
             { path: '', redirectTo: 'main', pathMatch: 'full' },
             { path: 'main', component: MainComponent,
               children:[
+                { path: '', redirectTo: 'business/welcome', pathMatch: 'full' },
                 {path:'business',loadChildren: './business/business.module#BusinessModule'},
-                { path: '', loadChildren: './business/business.module#BusinessModule' },
                 { path: '**', component: PageNotFoundComponent }
               ]},
 
