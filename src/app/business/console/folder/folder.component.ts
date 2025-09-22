@@ -424,7 +424,7 @@ export class FolderComponent implements OnInit {
         // 创建编辑器
         HMEditorLoader.createEditorAsync({
           container: "#editorContainer",
-          sdkHost: 'http://'+window.location.host+'/hmEditor',
+          sdkHost: window.location.protocol + '//' + window.location.host + '/hmEditor',
           style: {
               width: '100%',
               height: '100%',

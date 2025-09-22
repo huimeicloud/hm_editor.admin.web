@@ -322,7 +322,7 @@ export class DatasourceSetComponent implements OnInit {
     if (!this.checkSelDictVerData()) {
       return;
     }
-    this.selType = this.selVersionData['type'];
+    this.selType = this.selVersionData['remark'];
     this.selDs = null;
     this.editorDsDictVerData = Object.assign({}, this.selVersionData);
     this.dsDictVerDataDiagTitle = '修改数据元';
