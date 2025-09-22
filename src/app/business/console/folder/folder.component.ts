@@ -29,9 +29,9 @@ export class FolderComponent implements OnInit {
   isCreateEmrBaseTemplate = false;
   displayEmrBaseTemplateDialog = false;
   templateTypeList = [
-    {name: '住院', code: '住院'},
-    {name: '门诊', code: '门诊'},
-    {name: '急诊', code: '急诊'},
+    {label: '住院', value: '住院', name: '住院', code: '住院'},
+    {label: '门诊', value: '门诊', name: '门诊', code: '门诊'},
+    {label: '急诊', value: '急诊', name: '急诊', code: '急诊'},
   ];
   searchTemplateTypeList = [{name: '请选择', code: ''}].concat(this.templateTypeList);
   folderList = [];
@@ -55,12 +55,24 @@ export class FolderComponent implements OnInit {
     this.folderService.getAllFolders().then(d => {
       if(d.code == 10000){
         this.treeNodes = d.data.reduce((p,c) => {
+          // 保存_id字段的副本，避免删除后无法访问
+          const originalId = c['_id'];
           delete c['_id'];
-          this.folderList.push({"folder":c.name,"idStr":c.idStr,"_id":c._id});
+          
+          // 简化数据结构，只保留必要的字段
+          const folderItem = {
+            "label": c.name || '',
+            "value": c.idStr || '',
+            "folder": c.name || '',
+            "idStr": c.idStr || '',
+            "_id": originalId
+          };
+          
+          this.folderList.push(folderItem);
           let _d = {"name":c.name,"value":c};
           p.push(_d);
           return p;
-        },[]);
+        },[]);      
         if(this.treeNodes.length > 0){
         this.curFolder = this.treeNodes[0];
         this.getEmrBaseTemplateList('');
@@ -165,7 +177,14 @@ export class FolderComponent implements OnInit {
     this.emrBaseTemplate = new EmrBaseTemplate();
     if (!_.isEmpty(this.treeNodes)) {
       this.emrBaseTemplate.folderStr = this.curFolder['value']['idStr'];
-      this.emrBaseTemplate.folder = this.curFolder['value'];
+      // 修复：使用与folderList匹配的数据结构
+      this.emrBaseTemplate.folder = {
+        "label": this.curFolder['value']['name'],
+        "value": this.curFolder['value']['idStr'],
+        "folder": this.curFolder['value']['name'],
+        "idStr": this.curFolder['value']['idStr'],
+        "_id": this.curFolder['value']['_id']
+      };
     }
     this.emrBaseTemplate.typeObject = this.templateTypeList[0];
     this.displayEmrBaseTemplateDialog = true;
@@ -181,7 +200,8 @@ export class FolderComponent implements OnInit {
       return;
     }
     this.emrBaseTemplate.type = this.emrBaseTemplate.typeObject.code;
-    this.emrBaseTemplate.folderStr = this.emrBaseTemplate.folder['idStr'];
+    // 修复：确保正确访问folder的idStr属性
+    this.emrBaseTemplate.folderStr = (this.emrBaseTemplate.folder as any)['idStr'];
 
     if (this.isCreateEmrBaseTemplate) {
       this.folderService.addBaseTemplate(this.emrBaseTemplate,this.hosnum)

@@ -8,7 +8,7 @@
         <ul *ngIf="item.visible && item.items && item.items.length>0" class="ul-child"
           [class.showpopup]="menuPopup.label == item.label && menuPopup.popupDisplay"
           [class.showleaf]="navDisplay && item.expanded"
-          [ngStyle]="{'top':menuPopup.label == item.label ? menuPopup.top+'px':'0px'}">
+          [ngStyle]="{'top':menuPopup.label == item.label ? (menuPopup.top + 40)+'px':'0px'}">
           <li *ngFor="let childLevelItem of item.items;let childIndex = index">
             <div *ngIf="childLevelItem.visible" class="text-overflow" id="{{childLevelItem.label}}" [ngStyle]="{'color':(activeLink && childLevelItem.routerLink === activeLink)?'#EFC540':'#D8E3ED'}"
                   (click)="handleClick($event,childLevelItem,index,childIndex)" style="position: relative;overflow: visible;"

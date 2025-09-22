@@ -8,23 +8,25 @@
   height: 56px;
   width: 100%;
   z-index: 100;
-  // background: #409EFF;
+  background: linear-gradient(to right, #409EFF 60%, #3b55e7 100%);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  padding:0 20px;
 }
 
 #sysLogo{
-  width: 220px;
+  width: 250px;
   height: 56px;
   line-height: 56px;
-  //background: #29c3e8;
   display: flex;
   align-items: center;
-  transition: all 0.5s;
+  transition: width 0.3s;
   background: #409EFF;
 }
 
 #sysLogo.hide{
-  width: 50px;
+  width: 34px;
   justify-content: center;
 }
 
@@ -49,14 +51,16 @@
   display: inline-block;
   width: 24px;
   height: 24px;
+  margin-right: 10px;
 }
 
 .iconfont{
   position:absolute;
-  top:20px;
-  left:230px;
-  transition: all 0.5s;
-  // color: #fff;
+  top:16px;
+  left:258px;
+  color: #fff;
+  font-size: 20px;
+  transition: left 0.3s;
 }
 #rightValue{
   position: fixed;
@@ -68,4 +72,8 @@
 
 .iconfont.icon-menu-pack-up{
   left:60px;
+}
+
+#sysLogo.hide ~ .iconfont {
+  left: 60px;
 }
