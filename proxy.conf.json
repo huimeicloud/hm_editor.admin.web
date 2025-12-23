@@ -1,0 +1,9 @@
+{
+  "/hmEditor": {
+    "target": "https://editor.huimei.com",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
+
