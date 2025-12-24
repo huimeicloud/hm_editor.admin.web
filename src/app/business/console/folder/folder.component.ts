@@ -459,7 +459,8 @@ export class FolderComponent implements OnInit {
           readOnly: false,     // 是否启用只读模式
           customParams: {     // 自定义参数
 
-          }
+          },
+          editShowPaddingTopBottom: true
         })
         .then(function(result) {
             // 编辑器初始化完成
