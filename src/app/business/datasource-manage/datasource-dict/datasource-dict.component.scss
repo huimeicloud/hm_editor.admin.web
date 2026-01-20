@@ -10,7 +10,6 @@
     }
     .ops{
         text-align: right;
-        display: none;
     }
     .right{
         >div{
@@ -19,9 +18,9 @@
         }
     }   
 }
-:host /deep/ .left .ui-datatable-scrollable-body{
+:host ::ng-deep .left .ui-datatable-scrollable-body{
     max-height: calc(100vh - 225px);
 }
-:host /deep/ .right .ui-datatable-scrollable-body{
+:host ::ng-deep .right .ui-datatable-scrollable-body{
     max-height: calc(50vh - 140px);
 }
