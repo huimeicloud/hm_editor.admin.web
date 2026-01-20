@@ -73,42 +73,42 @@
   }
 }
 
-:host /deep/ .top .ui-datatable-scrollable-body {
+:host ::ng-deep .top .ui-datatable-scrollable-body {
   max-height: calc(100vh - 180px);
 }
 
-:host /deep/ .ui-state-highlight {
+:host ::ng-deep .ui-state-highlight {
   background-color: #4297fe !important;
   color: #fff !important;
 }
 
-:host /deep/ .iconfont {
+:host ::ng-deep .iconfont {
   font-size: 1em !important;
 }
 
-:host /deep/ p-dialog .ui-widget.ui-dialog .ui-dialog-titlebar {
+:host ::ng-deep p-dialog .ui-widget.ui-dialog .ui-dialog-titlebar {
   padding: 0.8em;
 }
 
-:host /deep/ p-dialog .ui-widget.ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon,
+:host ::ng-deep p-dialog .ui-widget.ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon,
 p-dialog .ui-widget.ui-dialog .ui-dialog-titlebar .ui-dialog-title,
 .ui-dialog.ui-confirmdialog .ui-dialog-titlebar .ui-dialog-titlebar-icon,
 .ui-dialog.ui-confirmdialog .ui-dialog-titlebar .ui-dialog-title {
   font-size: 14px;
 }
 
-:host /deep/ .ui-dialog {
+:host ::ng-deep .ui-dialog {
   .ui-dialog-content {
     padding: 15px 25px 5px !important;
     overflow: visible;
   }
 }
 
-:host /deep/ .ui-button { 
+:host ::ng-deep .ui-button { 
   font-size: 14px;
 }
 
-:host /deep/ .ui-datatable {
+:host ::ng-deep .ui-datatable {
   .ui-datatable-thead > tr > th {
     padding: 0.3em 0.5em;
   }
