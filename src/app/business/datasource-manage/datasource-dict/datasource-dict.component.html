@@ -1,11 +1,18 @@
 <div class="box">
   <div class="left">
     <span class="title">数据元值域列表</span>
-    <div style="margin: 3px 0 0 10px;height: 24px;">
+    <div style="margin: 3px 0 3px 10px;display: flex;justify-content: space-between;align-items: center;">
       <span style="font-size: 14px;">数据元值域共：{{dictRecord['total']}}</span>
       <input style="width: 200px;float: right;height: 22px;" pInputText type="text" [(ngModel)]="dictFilterText"
         [ngModelOptions]="{standalone: true}" (keyup)="dictFilterBlur($event)" placeholder="编码/名称" />
-    </div>
+      <span>
+         <button pButton label="增加" icon="fa-plus" (click)="addDsDict()"></button>
+        <button pButton label="修改" icon="icon iconfont icon-edit1" (click)="editDsDict()"></button>
+        <button pButton label="删除" icon="icon iconfont icon-delete" (click)="delDict()"></button>
+        <!-- <button pButton label="导出" icon="icon iconfont icon-synchronize" (click)="exportDict()"></button> -->
+        <!-- <button pButton label="启用" icon="icon iconfont icon-edit1" (click)="addRow()"></button> -->
+      </span>
+    </div> 
     <p-dataTable [style]="{'max-height': 'calc(100% - 50px)','overflow':'auto','text-align':'center','width':'100%'}" 
     [value]="dictRecord['data']" emptyMessage="暂无数据"  [totalRecords]="dictRecord['total']"  [lazy]="true"
     (onLazyLoad)="loadDictLazy($event)" [(first)]="dictFirst"
@@ -19,20 +26,11 @@
       <p-column header="启用状态" field="showStatus" [style]="{'width':'80px'}">
       </p-column>
     </p-dataTable>
-    <div class="ops">
-
-      <button pButton label="增加" icon="fa-plus" (click)="addDsDict()"></button>
-      <button pButton label="修改" icon="icon iconfont icon-edit1" (click)="editDsDict()"></button>
-      <button pButton label="删除" icon="icon iconfont icon-delete" (click)="delDict()"></button>
-      <!-- <button pButton label="导出" icon="icon iconfont icon-synchronize" (click)="exportDict()"></button> -->
-      <!-- <button pButton label="启用" icon="icon iconfont icon-edit1" (click)="addRow()"></button> -->
-    </div>
   </div>
   <div class="right">
-
     <div>
       <span class="title">值域数据项管理</span>
-      <div class="ops">
+      <div class="ops" style="margin: 3px 0 7px 10px;">
         <button pButton label="增加" icon="fa-plus" (click)="addDictVerDataRow()"></button>
         <button pButton label="修改" icon="icon iconfont icon-edit1" (click)="editorDictVerDataRow()"></button>
         <button pButton label="删除" icon="icon iconfont icon-delete" (click)="delDictVerData()"></button>
@@ -115,4 +113,5 @@
 
   </p-dialog>
 </div>
+<p-confirmDialog></p-confirmDialog>
 <p-growl [(value)]="msgs" [life]=5000></p-growl>

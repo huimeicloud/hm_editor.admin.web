@@ -42,24 +42,24 @@
     }
 }
 
-:host /deep/ .ui-state-highlight{
+:host ::ng-deep .ui-state-highlight{
     background-color: #4297fe !important;
     color:#fff !important;
 }
-:host /deep/ .iconfont{
+:host ::ng-deep .iconfont{
     font-size: 1em !important;
 }
-:host /deep/ p-dialog .ui-widget.ui-dialog .ui-dialog-titlebar{
+:host ::ng-deep p-dialog .ui-widget.ui-dialog .ui-dialog-titlebar{
     padding: 0.8em;
 }
-:host /deep/ p-dialog .ui-widget.ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon, p-dialog .ui-widget.ui-dialog .ui-dialog-titlebar .ui-dialog-title, .ui-dialog.ui-confirmdialog .ui-dialog-titlebar .ui-dialog-titlebar-icon, .ui-dialog.ui-confirmdialog .ui-dialog-titlebar .ui-dialog-title{
+:host ::ng-deep p-dialog .ui-widget.ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon, p-dialog .ui-widget.ui-dialog .ui-dialog-titlebar .ui-dialog-title, .ui-dialog.ui-confirmdialog .ui-dialog-titlebar .ui-dialog-titlebar-icon, .ui-dialog.ui-confirmdialog .ui-dialog-titlebar .ui-dialog-title{
     font-size: 14px;
 }
-:host /deep/ .row .ui-dropdown .ui-inputtext{
+:host ::ng-deep .row .ui-dropdown .ui-inputtext{
 
     padding: unset !important;
     padding-left: 3px !important;
 }
-:host /deep/ label.ui-dropdown-label{
+:host ::ng-deep label.ui-dropdown-label{
     padding-left: 3px !important;
 }

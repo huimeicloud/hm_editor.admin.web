@@ -22,23 +22,23 @@
         }
     }
 }
-:host /deep/ .left .ui-datatable-scrollable-body{
+:host ::ng-deep .left .ui-datatable-scrollable-body{
     max-height: calc(100vh - 240px);
 }
-:host /deep/ .right .ui-datatable-scrollable-body{
+:host ::ng-deep .right .ui-datatable-scrollable-body{
     max-height: calc(50vh - 160px);
 }
 
 /* 确保表格中的字体大小统一 */
-:host /deep/ .ui-datatable {
+:host ::ng-deep .ui-datatable {
   font-size: 14px;
 }
 
 /* 确保字段标签和输入框字体大小统一 */
-:host /deep/ label,
-:host /deep/ input,
-:host /deep/ button,
-:host /deep/ .ui-dropdown,
-:host /deep/ .ui-multiselect {
+:host ::ng-deep label,
+:host ::ng-deep input,
+:host ::ng-deep button,
+:host ::ng-deep .ui-dropdown,
+:host ::ng-deep .ui-multiselect {
   font-size: 14px;
 }
