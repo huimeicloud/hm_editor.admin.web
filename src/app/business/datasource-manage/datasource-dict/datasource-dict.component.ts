@@ -63,25 +63,33 @@ export class DatasourceDictComponent implements OnInit {
     if (!this.checkSel()) {
       return;
     }
-    if(this.selDict['count']){
-
-      this.showMessage('info','','当前值域已被数据元引用，不可删除');
-      return;
-    }
     let me = this;
-    this.confirmationService.confirm({
-      header: '确认删除',
-      icon: 'fa fa-trash',
-      message: '确认删除吗？',
-      accept: () => {
-        me.dsManageService.delDict(me.selDict['_id']).then(d => {
-          if (d['code'] == 10000) {
-            me.showMessage('success', '', '删除成功');
-            me.dictFilterBlur(null);
-          } else {
-            me.showMessage('success', '', '删除失败');
+    // 实时查询引用情况，确保校验准确
+    this.dsManageService.getDictRef(this.selDict['code']).then(refData => {
+      if (refData['code'] == 10000) {
+        const refList = refData['data'] || [];
+        if (refList.length > 0) {
+          me.showMessage('info', '', '当前值域已被数据元引用，不可删除');
+          return;
+        }
+        // 无引用，弹出确认框
+        me.confirmationService.confirm({
+          header: '确认删除',
+          icon: 'fa fa-trash',
+          message: '确认删除吗？',
+          accept: () => {
+            me.dsManageService.delDict(me.selDict['_id']).then(d => {
+              if (d['code'] == 10000) {
+                me.showMessage('success', '', '删除成功');
+                me.dictFilterBlur(null);
+              } else {
+                me.showMessage('error', '', '删除失败');
+              }
+            })
           }
-        })
+        });
+      } else {
+        me.showMessage('error', '', '获取引用情况异常');
       }
     });
   }
