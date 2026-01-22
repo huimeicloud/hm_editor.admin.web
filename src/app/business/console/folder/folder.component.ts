@@ -517,7 +517,9 @@ export class FolderComponent implements OnInit {
         this.loadingService.hide();
         if (data && data.code === 10000) {
           if (callback) {
-            callback(data.data);
+            // 处理 dictList，将 code 的值改为 description 的值
+            const processedData = this.processDictList(data.data);
+            callback(processedData);
           }
         } else {
           this.growlMessageService.showErrorInfo('获取模板数据集失败', data ? data.msg : '');
@@ -528,6 +530,41 @@ export class FolderComponent implements OnInit {
         this.growlMessageService.showErrorInfo('获取模板数据集失败', error);
         return null;
       });
+  }
+
+  /**
+   * 处理 dictList，将 code 的值改为 description 的值
+   * @param data 要处理的数据数组
+   * @returns 处理后的数据数组
+   */
+  private processDictList(data: any[]): any[] {
+    if (!data || !Array.isArray(data)) {
+      return data;
+    }
+
+    // 遍历数组中的每个元素
+    return data.map(item => {
+      if (!item || typeof item !== 'object') {
+        return item;
+      }
+
+      const processed = { ...item };
+      
+      // 如果存在 dictList 且是数组，处理 dictList 中的每个项
+      if (processed.dictList && Array.isArray(processed.dictList)) {
+        processed.dictList = processed.dictList.map((dictItem: any) => {
+          if (dictItem && typeof dictItem === 'object' && dictItem.description) {
+            return {
+              ...dictItem,
+              code: dictItem.description
+            };
+          }
+          return dictItem;
+        });
+      }
+
+      return processed;
+    });
   }
 
   /**
