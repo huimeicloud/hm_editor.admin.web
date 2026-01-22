@@ -126,6 +126,11 @@ export class DatasourceSetComponent implements OnInit {
     if (!this.checkSel()) {
       return;
     }
+    // 检查是否有引用，有引用则不允许删除
+    if (this.refrenceList && this.refrenceList.length > 0) {
+      this.showMessage('error', '', '该数据集存在引用，无法删除');
+      return;
+    }
     let me = this;
     this.confirmationService.confirm({
       header: '确认删除',
@@ -135,9 +140,14 @@ export class DatasourceSetComponent implements OnInit {
         me.dsManageService.delDsSet(me.selDict['_id']).then(d => {
           if (d['code'] == 10000) {
             me.showMessage('success', '', '删除成功');
+            me.selDict = null;
+            me.refrenceList = [];
+            me.verDataList = [];
+            me.verDataListBak = [];
+            me.verShowDataList = [];
             me.dictFilterBlur(null);
           } else {
-            me.showMessage('success', '', d['code'] == '10006'?d['msg']||'删除失败':'删除失败');
+            me.showMessage('error', '', d['code'] == '10006'?d['msg']||'删除失败':'删除失败');
           }
         })
       }
@@ -341,16 +351,31 @@ export class DatasourceSetComponent implements OnInit {
       this.showMessage('info','','请先选择数据');
       return;
     }
-    this.dsManageService.delDsSetVerData(this.selVersionData['_id']).then(d => {
-
-      if(d['code'] != 10000){
-        this.showMessage('error', '', '删除失败');
+    // 先检查该数据元是否有引用
+    let dsCode = this.selVersionData['code'] || this.selVersionData['refCode'];
+    this.dsManageService.getDsRef(dsCode).then(refData => {
+      let refList = refData['data'] || [];
+      if(refList.length > 0){
+        this.showMessage('error', '', '该数据元存在引用，无法删除');
         return;
       }
-      this.showMessage('error', '', '删除成功');
-      this.selVersionData = null;
-
-      this.doSearch();
+      // 没有引用，执行删除
+      this.confirmationService.confirm({
+        header: '确认删除',
+        icon: 'fa fa-trash',
+        message: '确认删除【'+this.selVersionData['name']+'】吗？',
+        accept: () => {
+          this.dsManageService.delDsSetVerData(this.selVersionData['_id']).then(d => {
+            if(d['code'] != 10000){
+              this.showMessage('error', '', '删除失败');
+              return;
+            }
+            this.showMessage('success', '', '删除成功');
+            this.selVersionData = null;
+            this.doSearch();
+          })
+        }
+      });
     })
   }
 

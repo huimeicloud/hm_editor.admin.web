@@ -143,16 +143,27 @@ export class DatasourceComponent implements OnInit {
     if(!this.checkSel()){
       return;
     }
-    this.dsManageService.delDatasource(this.selDs['_id']).then(d => {
-      if(d['code'] == '10000'){
-        this.showInfo('删除成功');
-        this.selDs = null;
-        this.dsFilterBlur(null);
-      }else{
-        this.showInfo('删除失败');
+    // 检查是否有引用，有引用则不允许删除
+    if(this.refrenceList && this.refrenceList.length > 0){
+      this.showError('该数据元存在引用，无法删除');
+      return;
+    }
+    this.confirmationService.confirm({
+      message: '确定要删除该数据元吗？',
+      accept: () => {
+        this.dsManageService.delDatasource(this.selDs['_id']).then(d => {
+          if(d['code'] == '10000'){
+            this.showSuccess('删除成功');
+            this.selDs = null;
+            this.refrenceList = [];
+            this.verDataList = [];
+            this.dsFilterBlur(null);
+          }else{
+            this.showError('删除失败');
+          }
+        })
       }
-
-    })
+    });
   }
   checkSel(){
     if(!this.selDs){
